@@ -1,0 +1,1744 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سایت خبری حرفه‌ای | پخش اخبار زنده</title>
+    <meta name="description" content="بهترین منبع اخبار روز با پوشش زنده و لحظه‌ای رویدادهای مهم. ثبت‌نام رایگان و دسترسی به اخبار اختصاصی.">
+    <meta name="keywords" content="اخبار, خبر فوری, پخش زنده, خبرگزاری, اخبار روز, اخبار سیاسی, اخبار اقتصادی">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #1a2530;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* انیمیشن‌ها */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+        
+        /* استایل عمومی */
+        a {
+            text-decoration: none;
+            color: var(--secondary-color);
+            transition: var(--transition);
+        }
+        
+        a:hover {
+            color: var(--accent-color);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Vazirmatn', sans-serif;
+            font-size: 16px;
+            transition: var(--transition);
+            animation: fadeIn 0.8s ease;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+        
+        .btn-danger {
+            background-color: var(--accent-color);
+        }
+        
+        .btn-danger:hover {
+            background-color: #c0392b;
+        }
+        
+        .btn-success {
+            background-color: var(--success-color);
+        }
+        
+        .btn-success:hover {
+            background-color: #219653;
+        }
+        
+        /* هدر و نوار ناوبری */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            animation: fadeIn 1s ease;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            animation: slideInRight 0.8s ease;
+        }
+        
+        .logo i {
+            margin-left: 10px;
+            color: var(--accent-color);
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .logo span {
+            color: var(--secondary-color);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-right: 25px;
+        }
+        
+        nav ul li a {
+            color: var(--primary-color);
+            font-weight: 600;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: var(--transition);
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        .user-actions {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-actions button {
+            margin-right: 10px;
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .user-profile img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-left: 10px;
+            border: 2px solid var(--secondary-color);
+            transition: var(--transition);
+        }
+        
+        .user-profile:hover img {
+            transform: scale(1.1);
+        }
+        
+        .user-profile span {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        /* بخش اصلی */
+        .main-content {
+            min-height: calc(100vh - 200px);
+            padding: 30px 0;
+            animation: fadeIn 1s ease;
+        }
+        
+        /* بخش اخبار */
+        .news-section {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-size: 28px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--secondary-color);
+            position: relative;
+            animation: fadeIn 0.8s ease;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            right: 0;
+            width: 100px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+        
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .news-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            animation: fadeIn 1s ease;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .news-image {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .news-card:hover .news-image {
+            transform: scale(1.05);
+        }
+        
+        .news-content {
+            padding: 20px;
+        }
+        
+        .news-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .news-excerpt {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.7;
+        }
+        
+        .news-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #888;
+            font-size: 14px;
+        }
+        
+        /* پخش زنده */
+        .live-section {
+            margin-bottom: 40px;
+            animation: fadeIn 1.2s ease;
+        }
+        
+        .live-broadcast {
+            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
+            border-radius: 10px;
+            padding: 20px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .live-broadcast::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shimmer 3s infinite;
+        }
+        
+        .live-indicator {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--accent-color);
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            animation: pulse 2s infinite;
+        }
+        
+        .live-indicator .dot {
+            width: 10px;
+            height: 10px;
+            background-color: white;
+            border-radius: 50%;
+            margin-left: 8px;
+        }
+        
+        .live-title {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        
+        .live-description {
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+        
+        /* فوتر */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 40px 0 20px;
+            margin-top: 50px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-section h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary-color);
+            padding-right: 5px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #34495e;
+            color: #aaa;
+            font-size: 14px;
+        }
+        
+        /* مودال‌ها */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .modal-content {
+            background-color: white;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 10px;
+            overflow: hidden;
+            animation: slideInRight 0.4s ease;
+        }
+        
+        .modal-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h2 {
+            font-size: 22px;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .close-modal:hover {
+            transform: rotate(90deg);
+        }
+        
+        .modal-body {
+            padding: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: 'Vazirmatn', sans-serif;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+            outline: none;
+        }
+        
+        /* پنل مدیریت */
+        .admin-panel {
+            display: none;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-top: 30px;
+            animation: fadeIn 1s ease;
+        }
+        
+        .admin-panel.active {
+            display: block;
+        }
+        
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--light-color);
+        }
+        
+        .admin-tabs {
+            display: flex;
+            overflow-x: auto;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .admin-tab {
+            padding: 12px 25px;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            font-family: 'Vazirmatn', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: #666;
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+        
+        .admin-tab:hover {
+            color: var(--primary-color);
+        }
+        
+        .admin-tab.active {
+            color: var(--secondary-color);
+            border-bottom-color: var(--secondary-color);
+        }
+        
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .news-form textarea {
+            min-height: 200px;
+            resize: vertical;
+        }
+        
+        .image-preview {
+            margin-top: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .image-preview-item {
+            width: 100px;
+            height: 100px;
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .image-preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .remove-image {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            width: 25px;
+            height: 25px;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .user-list {
+            list-style: none;
+        }
+        
+        .user-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            background-color: #f9f9f9;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-info img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-left: 15px;
+        }
+        
+        /* پنل کاربری */
+        .user-panel {
+            display: none;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-top: 30px;
+            animation: fadeIn 1s ease;
+        }
+        
+        .user-panel.active {
+            display: block;
+        }
+        
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--light-color);
+        }
+        
+        .profile-avatar {
+            position: relative;
+            margin-left: 30px;
+        }
+        
+        .profile-avatar img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--secondary-color);
+        }
+        
+        .change-avatar {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            width: 35px;
+            height: 35px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        
+        /* رسپانسیو */
+        @media (max-width: 992px) {
+            .header-container {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin: 20px 0;
+            }
+            
+            .user-actions {
+                margin-top: 10px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0 10px 10px;
+            }
+            
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .profile-avatar {
+                margin-left: 0;
+                margin-bottom: 20px;
+            }
+        }
+        
+        /* کلاس‌های کمکی */
+        .text-center { text-align: center; }
+        .mt-20 { margin-top: 20px; }
+        .mb-20 { margin-bottom: 20px; }
+        .mt-30 { margin-top: 30px; }
+        .mb-30 { margin-bottom: 30px; }
+        .d-none { display: none; }
+        .d-flex { display: flex; }
+        .justify-between { justify-content: space-between; }
+        .align-center { align-items: center; }
+    </style>
+</head>
+<body>
+    <!-- هدر -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-broadcast-tower"></i>
+                سایت <span>خبری</span> حرفه‌ای
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">خانه</a></li>
+                    <li><a href="#">اخبار فوری</a></li>
+                    <li><a href="#">سیاسی</a></li>
+                    <li><a href="#">اقتصادی</a></li>
+                    <li><a href="#">ورزشی</a></li>
+                    <li><a href="#">فناوری</a></li>
+                </ul>
+            </nav>
+            
+            <div class="user-actions">
+                <button class="btn" id="loginBtn">ورود</button>
+                <button class="btn btn-success" id="registerBtn">ثبت‌نام</button>
+                
+                <div class="user-profile d-none" id="userProfile">
+                    <img src="https://ui-avatars.com/api/?name=کاربر&background=3498db&color=fff" alt="پروفایل کاربر" id="userAvatar">
+                    <span id="userName">کاربر</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- محتوای اصلی -->
+    <main class="main-content container">
+        <!-- بخش پخش زنده -->
+        <section class="live-section">
+            <h2 class="section-title">پخش زنده</h2>
+            <div class="live-broadcast">
+                <div class="live-indicator">
+                    <span class="dot"></span>
+                    <span>پخش زنده</span>
+                </div>
+                <h3 class="live-title">گزارش زنده از نشست اضطراری شورای امنیت</h3>
+                <p class="live-description">پوشش زنده نشست اضطراری شورای امنیت درباره تحولات منطقه. تحلیلگران سیاسی به صورت زنده نظرات خود را ارائه می‌دهند.</p>
+                <div class="live-player" id="livePlayer">
+                    <div style="background-color: #000; color: white; height: 300px; display: flex; align-items: center; justify-content: center; border-radius: 5px;">
+                        <i class="fas fa-satellite-dish fa-3x" style="margin-left: 15px;"></i>
+                        <div>
+                            <h4>پخش زنده در حال انجام است</h4>
+                            <p>برای مشاهده پخش زنده، لطفاً وارد حساب کاربری خود شوید</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- بخش اخبار -->
+        <section class="news-section">
+            <h2 class="section-title">آخرین اخبار</h2>
+            <div class="news-grid" id="newsContainer">
+                <!-- اخبار به صورت دینامیک لود می‌شوند -->
+            </div>
+        </section>
+
+        <!-- پنل مدیریت -->
+        <div class="admin-panel" id="adminPanel">
+            <div class="admin-header">
+                <h2>پنل مدیریت حرفه‌ای</h2>
+                <button class="btn btn-danger" id="logoutAdminBtn">خروج از حالت ادمین</button>
+            </div>
+            
+            <div class="admin-tabs">
+                <button class="admin-tab active" data-tab="news-management">مدیریت اخبار</button>
+                <button class="admin-tab" data-tab="live-management">مدیریت پخش زنده</button>
+                <button class="admin-tab" data-tab="user-management">مدیریت کاربران</button>
+                <button class="admin-tab" data-tab="site-settings">تنظیمات سایت</button>
+            </div>
+            
+            <div class="tab-content active" id="news-management">
+                <h3 class="mb-20">افزودن خبر جدید</h3>
+                <form class="news-form">
+                    <div class="form-group">
+                        <label for="newsTitle">عنوان خبر:</label>
+                        <input type="text" id="newsTitle" class="form-control" placeholder="عنوان خبر را وارد کنید">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="newsContent">محتوای خبر:</label>
+                        <textarea id="newsContent" class="form-control" placeholder="متن کامل خبر را وارد کنید"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>افزودن تصویر:</label>
+                        <input type="file" id="newsImage" class="form-control" accept="image/*">
+                        <div class="image-preview" id="imagePreview"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="newsCategory">دسته‌بندی:</label>
+                        <select id="newsCategory" class="form-control">
+                            <option value="عمومی">عمومی</option>
+                            <option value="سیاسی">سیاسی</option>
+                            <option value="اقتصادی">اقتصادی</option>
+                            <option value="ورزشی">ورزشی</option>
+                            <option value="فناوری">فناوری</option>
+                        </select>
+                    </div>
+                    
+                    <button type="button" class="btn btn-success" id="addNewsBtn">انتشار خبر</button>
+                </form>
+                
+                <h3 class="mt-30 mb-20">اخبار منتشر شده</h3>
+                <div id="publishedNews">
+                    <!-- اخبار منتشر شده به صورت دینامیک نمایش داده می‌شوند -->
+                </div>
+            </div>
+            
+            <div class="tab-content" id="live-management">
+                <h3 class="mb-20">کنترل پخش زنده</h3>
+                <div class="form-group">
+                    <label for="liveStatus">وضعیت پخش:</label>
+                    <select id="liveStatus" class="form-control">
+                        <option value="active">فعال</option>
+                        <option value="inactive">غیرفعال</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="liveTitle">عنوان پخش زنده:</label>
+                    <input type="text" id="liveTitle" class="form-control" placeholder="عنوان پخش زنده را وارد کنید">
+                </div>
+                
+                <div class="form-group">
+                    <label for="liveDescription">توضیحات پخش زنده:</label>
+                    <textarea id="liveDescription" class="form-control" placeholder="توضیحات پخش زنده را وارد کنید"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="liveStreamUrl">آدرس استریم:</label>
+                    <input type="text" id="liveStreamUrl" class="form-control" placeholder="آدرس استریم را وارد کنید">
+                </div>
+                
+                <button type="button" class="btn btn-success" id="updateLiveBtn">به‌روزرسانی پخش زنده</button>
+            </div>
+            
+            <div class="tab-content" id="user-management">
+                <h3 class="mb-20">مدیریت کاربران</h3>
+                <div class="form-group">
+                    <input type="text" id="searchUser" class="form-control" placeholder="جستجوی کاربر...">
+                </div>
+                
+                <ul class="user-list" id="userList">
+                    <!-- لیست کاربران به صورت دینامیک نمایش داده می‌شود -->
+                </ul>
+            </div>
+            
+            <div class="tab-content" id="site-settings">
+                <h3 class="mb-20">تنظیمات سایت</h3>
+                <div class="form-group">
+                    <label for="siteTitle">عنوان سایت:</label>
+                    <input type="text" id="siteTitle" class="form-control" value="سایت خبری حرفه‌ای">
+                </div>
+                
+                <div class="form-group">
+                    <label for="siteDescription">توضیحات سایت (برای سئو):</label>
+                    <textarea id="siteDescription" class="form-control">بهترین منبع اخبار روز با پوشش زنده و لحظه‌ای رویدادهای مهم. ثبت‌نام رایگان و دسترسی به اخبار اختصاصی.</textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="siteKeywords">کلمات کلیدی (با کاما جدا کنید):</label>
+                    <textarea id="siteKeywords" class="form-control">اخبار, خبر فوری, پخش زنده, خبرگزاری, اخبار روز, اخبار سیاسی, اخبار اقتصادی</textarea>
+                </div>
+                
+                <button type="button" class="btn btn-success" id="saveSettingsBtn">ذخیره تنظیمات</button>
+            </div>
+        </div>
+        
+        <!-- پنل کاربری -->
+        <div class="user-panel" id="userPanel">
+            <div class="profile-header">
+                <div class="profile-avatar">
+                    <img src="https://ui-avatars.com/api/?name=کاربر&background=3498db&color=fff" alt="پروفایل کاربر" id="profileAvatar">
+                    <div class="change-avatar" id="changeAvatarBtn">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                </div>
+                <div>
+                    <h2 id="profileName">کاربر عادی</h2>
+                    <p id="profileEmail">user@example.com</p>
+                    <p>عضویت از: <span id="joinDate">۱۴۰۲/۰۱/۱۵</span></p>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="editUserName">نام کاربری:</label>
+                <input type="text" id="editUserName" class="form-control" value="کاربر عادی">
+            </div>
+            
+            <div class="form-group">
+                <label for="editUserEmail">ایمیل:</label>
+                <input type="email" id="editUserEmail" class="form-control" value="user@example.com">
+            </div>
+            
+            <div class="form-group">
+                <label for="editUserPassword">تغییر رمز عبور (خالی بگذارید اگر نمی‌خواهید تغییر کند):</label>
+                <input type="password" id="editUserPassword" class="form-control" placeholder="رمز عبور جدید">
+            </div>
+            
+            <button type="button" class="btn btn-success" id="updateProfileBtn">به‌روزرسانی پروفایل</button>
+            <button type="button" class="btn btn-danger mt-20" id="logoutUserBtn">خروج از حساب کاربری</button>
+        </div>
+    </main>
+
+    <!-- فوتر -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>درباره ما</h3>
+                    <p>سایت خبری حرفه‌ای با هدف ارائه آخرین اخبار و گزارش‌های لحظه‌ای از رویدادهای مهم داخلی و بین‌المللی راه‌اندازی شده است.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>لینک‌های سریع</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">تماس با ما</a></li>
+                        <li><a href="#">درباره ما</a></li>
+                        <li><a href="#">قوانین و مقررات</a></li>
+                        <li><a href="#">حریم خصوصی</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>شبکه‌های اجتماعی</h3>
+                    <div class="social-links">
+                        <a href="#" style="color: #ddd; font-size: 20px; margin-left: 15px;"><i class="fab fa-telegram"></i></a>
+                        <a href="#" style="color: #ddd; font-size: 20px; margin-left: 15px;"><i class="fab fa-instagram"></i></a>
+                        <a href="#" style="color: #ddd; font-size: 20px; margin-left: 15px;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: #ddd; font-size: 20px; margin-left: 15px;"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>کلیه حقوق این سایت متعلق به سایت خبری حرفه‌ای می‌باشد. © ۱۴۰۲</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- مودال ورود -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>ورود به حساب کاربری</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="loginEmail">ایمیل:</label>
+                        <input type="email" id="loginEmail" class="form-control" required placeholder="example@email.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="loginPassword">رمز عبور:</label>
+                        <input type="password" id="loginPassword" class="form-control" required placeholder="رمز عبور">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="rememberMe"> مرا به خاطر بسپار
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-success" style="width: 100%;">ورود</button>
+                    
+                    <p class="text-center mt-20">
+                        حساب کاربری ندارید؟ <a href="#" id="showRegister">ثبت‌نام کنید</a>
+                    </p>
+                    
+                    <div class="text-center mt-20">
+                        <button type="button" class="btn" id="adminDemoBtn">ورود به عنوان ادمین (دمو)</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- مودال ثبت‌نام -->
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>ثبت‌نام در سایت</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label for="registerName">نام کامل:</label>
+                        <input type="text" id="registerName" class="form-control" required placeholder="نام و نام خانوادگی">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerEmail">ایمیل:</label>
+                        <input type="email" id="registerEmail" class="form-control" required placeholder="example@email.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerPassword">رمز عبور:</label>
+                        <input type="password" id="registerPassword" class="form-control" required placeholder="رمز عبور">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="registerConfirmPassword">تکرار رمز عبور:</label>
+                        <input type="password" id="registerConfirmPassword" class="form-control" required placeholder="تکرار رمز عبور">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-success" style="width: 100%;">ثبت‌نام</button>
+                    
+                    <p class="text-center mt-20">
+                        قبلاً ثبت‌نام کرده‌اید؟ <a href="#" id="showLogin">وارد شوید</a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // داده‌های اولیه
+        let currentUser = null;
+        let isAdmin = false;
+        
+        // داده‌های نمونه برای اخبار
+        const sampleNews = [
+            {
+                id: 1,
+                title: "افتتاح پروژه بزرگ ملی در زمینه انرژی‌های تجدیدپذیر",
+                excerpt: "رئیس‌جمهور امروز در مراسمی رسمی از بزرگترین پروژه انرژی خورشیدی کشور رونمایی کرد. این پروژه قادر به تأمین برق ۵۰۰ هزار خانوار خواهد بود.",
+                image: "https://images.unsplash.com/photo-1466611653911-95081537e5b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                category: "اقتصادی",
+                date: "۱۴۰۲/۰۲/۱۰",
+                views: 1250
+            },
+            {
+                id: 2,
+                title: "پیروزی تیم ملی فوتبال در رقابت‌های قهرمانی آسیا",
+                excerpt: "تیم ملی فوتبال کشورمان با نتیجه ۳ بر ۱ حریف خود را شکست داد و به مرحله نیمه نهایی رقابت‌های قهرمانی آسیا صعود کرد.",
+                image: "https://images.unsplash.com/photo-1575361204480-aadea25e6e68?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                category: "ورزشی",
+                date: "۱۴۰۲/۰۲/۰۹",
+                views: 3200
+            },
+            {
+                id: 3,
+                title: "نشست وزرای خارجه کشورهای منطقه درباره امنیت انرژی",
+                excerpt: "وزرای خارجه پنج کشور منطقه امروز در نشستی اضطراری درباره مسائل امنیت انرژی و همکاری‌های منطقه‌ای به گفتگو پرداختند.",
+                image: "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                category: "سیاسی",
+                date: "۱۴۰۲/۰۲/۰۸",
+                views: 1800
+            }
+        ];
+        
+        // داده‌های نمونه برای کاربران
+        const sampleUsers = [
+            { id: 1, name: "علی محمدی", email: "ali@example.com", avatar: "https://ui-avatars.com/api/?name=علی+محمدی&background=2ecc71&color=fff", role: "user", joinDate: "۱۴۰۱/۱۱/۲۰" },
+            { id: 2, name: "فاطمه کریمی", email: "fatemeh@example.com", avatar: "https://ui-avatars.com/api/?name=فاطمه+کریمی&background=9b59b6&color=fff", role: "user", joinDate: "۱۴۰۲/۰۱/۱۵" },
+            { id: 3, name: "محمد رضایی", email: "mohammad@example.com", avatar: "https://ui-avatars.com/api/?name=محمد+رضایی&background=e74c3c&color=fff", role: "user", joinDate: "۱۴۰۱/۱۲/۱۰" }
+        ];
+        
+        // تابع برای تولید آواتار تصادفی
+        function generateRandomAvatar(name) {
+            const colors = ['3498db', '2ecc71', '9b59b6', 'e74c3c', 'f39c12', '1abc9c'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            return `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=${randomColor}&color=fff`;
+        }
+        
+        // بارگذاری اولیه صفحه
+        document.addEventListener('DOMContentLoaded', function() {
+            // بارگذاری اخبار نمونه
+            loadSampleNews();
+            
+            // بارگذاری کاربران نمونه
+            loadSampleUsers();
+            
+            // بررسی وضعیت ورود کاربر
+            checkLoginStatus();
+            
+            // رویدادهای مودال‌ها
+            setupModalEvents();
+            
+            // رویدادهای پنل مدیریت
+            setupAdminPanelEvents();
+            
+            // رویدادهای پنل کاربری
+            setupUserPanelEvents();
+            
+            // نمایش پخش زنده دمو
+            setupLiveDemo();
+        });
+        
+        // بارگذاری اخبار نمونه
+        function loadSampleNews() {
+            const newsContainer = document.getElementById('newsContainer');
+            newsContainer.innerHTML = '';
+            
+            sampleNews.forEach(news => {
+                const newsCard = document.createElement('div');
+                newsCard.className = 'news-card';
+                newsCard.innerHTML = `
+                    <img src="${news.image}" alt="${news.title}" class="news-image">
+                    <div class="news-content">
+                        <h3 class="news-title">${news.title}</h3>
+                        <p class="news-excerpt">${news.excerpt}</p>
+                        <div class="news-meta">
+                            <span><i class="fas fa-folder"></i> ${news.category}</span>
+                            <span><i class="far fa-calendar-alt"></i> ${news.date}</span>
+                            <span><i class="far fa-eye"></i> ${news.views.toLocaleString()}</span>
+                        </div>
+                    </div>
+                `;
+                newsContainer.appendChild(newsCard);
+            });
+        }
+        
+        // بارگذاری کاربران نمونه
+        function loadSampleUsers() {
+            const userList = document.getElementById('userList');
+            userList.innerHTML = '';
+            
+            sampleUsers.forEach(user => {
+                const userItem = document.createElement('li');
+                userItem.className = 'user-item';
+                userItem.innerHTML = `
+                    <div class="user-info">
+                        <img src="${user.avatar}" alt="${user.name}">
+                        <div>
+                            <h4>${user.name}</h4>
+                            <p>${user.email}</p>
+                            <small>عضویت از: ${user.joinDate}</small>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="btn btn-danger btn-sm delete-user" data-id="${user.id}">حذف کاربر</button>
+                    </div>
+                `;
+                userList.appendChild(userItem);
+            });
+        }
+        
+        // بررسی وضعیت ورود کاربر
+        function checkLoginStatus() {
+            // در یک سیستم واقعی، اینجا باید کوکی یا توکن بررسی شود
+            const loggedIn = localStorage.getItem('newsSiteLoggedIn');
+            const userData = localStorage.getItem('newsSiteUserData');
+            
+            if (loggedIn === 'true' && userData) {
+                currentUser = JSON.parse(userData);
+                isAdmin = currentUser.role === 'admin';
+                
+                updateUIForLoggedInUser();
+                
+                if (isAdmin) {
+                    showAdminPanel();
+                } else {
+                    showUserPanel();
+                }
+            }
+        }
+        
+        // به‌روزرسانی UI برای کاربر وارد شده
+        function updateUIForLoggedInUser() {
+            const loginBtn = document.getElementById('loginBtn');
+            const registerBtn = document.getElementById('registerBtn');
+            const userProfile = document.getElementById('userProfile');
+            const userName = document.getElementById('userName');
+            const userAvatar = document.getElementById('userAvatar');
+            
+            if (currentUser) {
+                loginBtn.style.display = 'none';
+                registerBtn.style.display = 'none';
+                userProfile.classList.remove('d-none');
+                
+                userName.textContent = currentUser.name;
+                userAvatar.src = currentUser.avatar || generateRandomAvatar(currentUser.name);
+            }
+        }
+        
+        // رویدادهای مودال‌ها
+        function setupModalEvents() {
+            // دکمه‌های باز کردن مودال
+            document.getElementById('loginBtn').addEventListener('click', () => showModal('loginModal'));
+            document.getElementById('registerBtn').addEventListener('click', () => showModal('registerModal'));
+            document.getElementById('userProfile').addEventListener('click', () => {
+                if (isAdmin) {
+                    showAdminPanel();
+                } else {
+                    showUserPanel();
+                }
+            });
+            
+            // دکمه‌های بستن مودال
+            document.querySelectorAll('.close-modal').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.modal').forEach(modal => {
+                        modal.classList.remove('active');
+                    });
+                });
+            });
+            
+            // تغییر بین فرم‌های ورود و ثبت‌نام
+            document.getElementById('showRegister').addEventListener('click', (e) => {
+                e.preventDefault();
+                document.getElementById('loginModal').classList.remove('active');
+                document.getElementById('registerModal').classList.add('active');
+            });
+            
+            document.getElementById('showLogin').addEventListener('click', (e) => {
+                e.preventDefault();
+                document.getElementById('registerModal').classList.remove('active');
+                document.getElementById('loginModal').classList.add('active');
+            });
+            
+            // فرم ورود
+            document.getElementById('loginForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = document.getElementById('loginEmail').value;
+                const password = document.getElementById('loginPassword').value;
+                
+                // در یک سیستم واقعی، اینجا باید درخواست به سرور ارسال شود
+                if (email && password) {
+                    // حالت دمو: اگر ایمیل admin@example.com باشد، کاربر ادمین است
+                    if (email === 'admin@example.com' && password === 'admin123') {
+                        currentUser = {
+                            id: 999,
+                            name: 'مدیر سایت',
+                            email: email,
+                            role: 'admin',
+                            avatar: generateRandomAvatar('مدیر سایت'),
+                            joinDate: '۱۴۰۱/۰۱/۰۱'
+                        };
+                        isAdmin = true;
+                    } else {
+                        currentUser = {
+                            id: Math.floor(Math.random() * 1000),
+                            name: email.split('@')[0],
+                            email: email,
+                            role: 'user',
+                            avatar: generateRandomAvatar(email.split('@')[0]),
+                            joinDate: new Date().toLocaleDateString('fa-IR')
+                        };
+                        isAdmin = false;
+                    }
+                    
+                    // ذخیره در localStorage برای حالت دمو
+                    localStorage.setItem('newsSiteLoggedIn', 'true');
+                    localStorage.setItem('newsSiteUserData', JSON.stringify(currentUser));
+                    
+                    // به‌روزرسانی UI
+                    updateUIForLoggedInUser();
+                    
+                    // بستن مودال
+                    document.getElementById('loginModal').classList.remove('active');
+                    
+                    // نمایش پیام موفقیت
+                    showNotification('با موفقیت وارد شدید!', 'success');
+                    
+                    // نمایش پنل مناسب
+                    if (isAdmin) {
+                        showAdminPanel();
+                    } else {
+                        showUserPanel();
+                    }
+                } else {
+                    showNotification('لطفاً تمام فیلدها را پر کنید.', 'error');
+                }
+            });
+            
+            // فرم ثبت‌نام
+            document.getElementById('registerForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = document.getElementById('registerName').value;
+                const email = document.getElementById('registerEmail').value;
+                const password = document.getElementById('registerPassword').value;
+                const confirmPassword = document.getElementById('registerConfirmPassword').value;
+                
+                if (name && email && password && confirmPassword) {
+                    if (password !== confirmPassword) {
+                        showNotification('رمز عبور و تکرار آن مطابقت ندارند.', 'error');
+                        return;
+                    }
+                    
+                    // ایجاد کاربر جدید
+                    currentUser = {
+                        id: Math.floor(Math.random() * 1000),
+                        name: name,
+                        email: email,
+                        role: 'user',
+                        avatar: generateRandomAvatar(name),
+                        joinDate: new Date().toLocaleDateString('fa-IR')
+                    };
+                    isAdmin = false;
+                    
+                    // ذخیره در localStorage برای حالت دمو
+                    localStorage.setItem('newsSiteLoggedIn', 'true');
+                    localStorage.setItem('newsSiteUserData', JSON.stringify(currentUser));
+                    
+                    // به‌روزرسانی UI
+                    updateUIForLoggedInUser();
+                    
+                    // بستن مودال
+                    document.getElementById('registerModal').classList.remove('active');
+                    
+                    // نمایش پیام موفقیت
+                    showNotification('ثبت‌نام با موفقیت انجام شد!', 'success');
+                    
+                    // نمایش پنل کاربری
+                    showUserPanel();
+                } else {
+                    showNotification('لطفاً تمام فیلدها را پر کنید.', 'error');
+                }
+            });
+            
+            // دکمه دمو ادمین
+            document.getElementById('adminDemoBtn').addEventListener('click', () => {
+                document.getElementById('loginEmail').value = 'admin@example.com';
+                document.getElementById('loginPassword').value = 'admin123';
+                
+                // شبیه‌سازی ارسال فرم
+                const submitEvent = new Event('submit', { cancelable: true });
+                document.getElementById('loginForm').dispatchEvent(submitEvent);
+            });
+        }
+        
+        // نمایش مودال
+        function showModal(modalId) {
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.classList.remove('active');
+            });
+            document.getElementById(modalId).classList.add('active');
+        }
+        
+        // نمایش پنل مدیریت
+        function showAdminPanel() {
+            document.getElementById('adminPanel').classList.add('active');
+            document.getElementById('userPanel').classList.remove('active');
+            
+            // بارگذاری اخبار منتشر شده
+            loadPublishedNews();
+        }
+        
+        // نمایش پنل کاربری
+        function showUserPanel() {
+            if (!currentUser) return;
+            
+            document.getElementById('userPanel').classList.add('active');
+            document.getElementById('adminPanel').classList.remove('active');
+            
+            // پر کردن اطلاعات پروفایل
+            document.getElementById('profileName').textContent = currentUser.name;
+            document.getElementById('profileEmail').textContent = currentUser.email;
+            document.getElementById('joinDate').textContent = currentUser.joinDate;
+            document.getElementById('profileAvatar').src = currentUser.avatar || generateRandomAvatar(currentUser.name);
+            
+            document.getElementById('editUserName').value = currentUser.name;
+            document.getElementById('editUserEmail').value = currentUser.email;
+        }
+        
+        // رویدادهای پنل مدیریت
+        function setupAdminPanelEvents() {
+            // تغییر تب‌های مدیریت
+            document.querySelectorAll('.admin-tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabId = tab.getAttribute('data-tab');
+                    
+                    // به‌روزرسانی تب فعال
+                    document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    // نمایش محتوای تب مربوطه
+                    document.querySelectorAll('.tab-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // افزودن خبر جدید
+            document.getElementById('addNewsBtn').addEventListener('click', () => {
+                const title = document.getElementById('newsTitle').value;
+                const content = document.getElementById('newsContent').value;
+                const category = document.getElementById('newsCategory').value;
+                
+                if (title && content) {
+                    // ایجاد خبر جدید
+                    const newNews = {
+                        id: Date.now(),
+                        title: title,
+                        excerpt: content.substring(0, 150) + '...',
+                        content: content,
+                        image: document.querySelector('#imagePreview img') ? document.querySelector('#imagePreview img').src : 'https://images.unsplash.com/photo-1588681664899-f142ff2dc9b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                        category: category,
+                        date: new Date().toLocaleDateString('fa-IR'),
+                        views: 0
+                    };
+                    
+                    // اضافه کردن به لیست اخبار
+                    sampleNews.unshift(newNews);
+                    
+                    // بارگذاری مجدد اخبار
+                    loadSampleNews();
+                    loadPublishedNews();
+                    
+                    // پاک کردن فرم
+                    document.getElementById('newsTitle').value = '';
+                    document.getElementById('newsContent').value = '';
+                    document.getElementById('imagePreview').innerHTML = '';
+                    
+                    // نمایش پیام موفقیت
+                    showNotification('خبر با موفقیت منتشر شد!', 'success');
+                } else {
+                    showNotification('لطفاً عنوان و محتوای خبر را وارد کنید.', 'error');
+                }
+            });
+            
+            // پیش‌نمایش تصویر
+            document.getElementById('newsImage').addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const imagePreview = document.getElementById('imagePreview');
+                        imagePreview.innerHTML = `
+                            <div class="image-preview-item">
+                                <img src="${e.target.result}" alt="پیش‌نمایش">
+                                <div class="remove-image">&times;</div>
+                            </div>
+                        `;
+                        
+                        // افزودن رویداد حذف تصویر
+                        document.querySelector('.remove-image').addEventListener('click', function() {
+                            imagePreview.innerHTML = '';
+                            document.getElementById('newsImage').value = '';
+                        });
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+            
+            // به‌روزرسانی پخش زنده
+            document.getElementById('updateLiveBtn').addEventListener('click', () => {
+                const status = document.getElementById('liveStatus').value;
+                const title = document.getElementById('liveTitle').value;
+                const description = document.getElementById('liveDescription').value;
+                const streamUrl = document.getElementById('liveStreamUrl').value;
+                
+                if (title && description) {
+                    // به‌روزرسانی بخش پخش زنده در صفحه اصلی
+                    const liveTitleElement = document.querySelector('.live-title');
+                    const liveDescriptionElement = document.querySelector('.live-description');
+                    const livePlayerElement = document.getElementById('livePlayer');
+                    
+                    if (liveTitleElement) liveTitleElement.textContent = title;
+                    if (liveDescriptionElement) liveDescriptionElement.textContent = description;
+                    
+                    if (status === 'active' && streamUrl) {
+                        livePlayerElement.innerHTML = `
+                            <div style="position: relative; padding-bottom: 56.25%; height: 0;">
+                                <iframe src="${streamUrl}" style="position: absolute; top: 0; right: 0; width: 100%; height: 100%; border-radius: 5px;" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            </div>
+                        `;
+                    }
+                    
+                    showNotification('پخش زنده با موفقیت به‌روزرسانی شد!', 'success');
+                } else {
+                    showNotification('لطفاً عنوان و توضیحات پخش زنده را وارد کنید.', 'error');
+                }
+            });
+            
+            // جستجوی کاربر
+            document.getElementById('searchUser').addEventListener('input', function(e) {
+                const searchTerm = e.target.value.toLowerCase();
+                const userItems = document.querySelectorAll('.user-item');
+                
+                userItems.forEach(item => {
+                    const userName = item.querySelector('h4').textContent.toLowerCase();
+                    const userEmail = item.querySelector('p').textContent.toLowerCase();
+                    
+                    if (userName.includes(searchTerm) || userEmail.includes(searchTerm)) {
+                        item.style.display = 'flex';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+            
+            // حذف کاربر (در حالت دمو فقط از رابط کاربری حذف می‌شود)
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('delete-user')) {
+                    const userId = parseInt(e.target.getAttribute('data-id'));
+                    const userIndex = sampleUsers.findIndex(user => user.id === userId);
+                    
+                    if (userIndex !== -1) {
+                        sampleUsers.splice(userIndex, 1);
+                        loadSampleUsers();
+                        showNotification('کاربر با موفقیت حذف شد!', 'success');
+                    }
+                }
+            });
+            
+            // ذخیره تنظیمات سایت
+            document.getElementById('saveSettingsBtn').addEventListener('click', () => {
+                const siteTitle = document.getElementById('siteTitle').value;
+                const siteDescription = document.getElementById('siteDescription').value;
+                const siteKeywords = document.getElementById('siteKeywords').value;
+                
+                // به‌روزرسانی عنوان صفحه
+                document.title = siteTitle + ' | پخش اخبار زنده';
+                
+                // به‌روزرسانی متا تگ‌های سئو
+                document.querySelector('meta[name="description"]').setAttribute('content', siteDescription);
+                document.querySelector('meta[name="keywords"]').setAttribute('content', siteKeywords);
+                
+                showNotification('تنظیمات سایت با موفقیت ذخیره شد!', 'success');
+            });
+            
+            // خروج از حالت ادمین
+            document.getElementById('logoutAdminBtn').addEventListener('click', logout);
+        }
+        
+        // بارگذاری اخبار منتشر شده در پنل مدیریت
+        function loadPublishedNews() {
+            const publishedNewsContainer = document.getElementById('publishedNews');
+            publishedNewsContainer.innerHTML = '';
+            
+            sampleNews.forEach(news => {
+                const newsItem = document.createElement('div');
+                newsItem.className = 'news-item';
+                newsItem.style.cssText = 'background: #f9f9f9; padding: 15px; border-radius: 5px; margin-bottom: 15px;';
+                newsItem.innerHTML = `
+                    <div class="d-flex justify-between align-center">
+                        <div>
+                            <h4>${news.title}</h4>
+                            <p style="color: #666; margin-top: 5px;">دسته‌بندی: ${news.category} | تاریخ: ${news.date} | بازدید: ${news.views.toLocaleString()}</p>
+                        </div>
+                        <div>
+                            <button class="btn btn-danger btn-sm delete-news" data-id="${news.id}">حذف</button>
+                            <button class="btn btn-sm edit-news" data-id="${news.id}">ویرایش</button>
+                        </div>
+                    </div>
+                `;
+                publishedNewsContainer.appendChild(newsItem);
+            });
+            
+            // رویداد حذف خبر
+            document.querySelectorAll('.delete-news').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const newsId = parseInt(this.getAttribute('data-id'));
+                    const newsIndex = sampleNews.findIndex(news => news.id === newsId);
+                    
+                    if (newsIndex !== -1) {
+                        sampleNews.splice(newsIndex, 1);
+                        loadSampleNews();
+                        loadPublishedNews();
+                        showNotification('خبر با موفقیت حذف شد!', 'success');
+                    }
+                });
+            });
+        }
+        
+        // رویدادهای پنل کاربری
+        function setupUserPanelEvents() {
+            // تغییر آواتار
+            document.getElementById('changeAvatarBtn').addEventListener('click', function() {
+                const newAvatarUrl = prompt('لطفاً آدرس تصویر جدید را وارد کنید:');
+                if (newAvatarUrl) {
+                    document.getElementById('profileAvatar').src = newAvatarUrl;
+                    document.getElementById('userAvatar').src = newAvatarUrl;
+                    
+                    // به‌روزرسانی در currentUser
+                    if (currentUser) {
+                        currentUser.avatar = newAvatarUrl;
+                        localStorage.setItem('newsSiteUserData', JSON.stringify(currentUser));
+                    }
+                    
+                    showNotification('تصویر پروفایل با موفقیت تغییر کرد!', 'success');
+                }
+            });
+            
+            // به‌روزرسانی پروفایل
+            document.getElementById('updateProfileBtn').addEventListener('click', function() {
+                const newName = document.getElementById('editUserName').value;
+                const newEmail = document.getElementById('editUserEmail').value;
+                const newPassword = document.getElementById('editUserPassword').value;
+                
+                if (newName && newEmail) {
+                    // به‌روزرسانی اطلاعات کاربر
+                    if (currentUser) {
+                        currentUser.name = newName;
+                        currentUser.email = newEmail;
+                        
+                        // اگر رمز عبور جدید وارد شده
+                        if (newPassword) {
+                            showNotification('رمز عبور با موفقیت تغییر کرد!', 'success');
+                        }
+                        
+                        // ذخیره در localStorage
+                        localStorage.setItem('newsSiteUserData', JSON.stringify(currentUser));
+                        
+                        // به‌روزرسانی UI
+                        document.getElementById('userName').textContent = newName;
+                        document.getElementById('profileName').textContent = newName;
+                        document.getElementById('profileEmail').textContent = newEmail;
+                        
+                        showNotification('پروفایل با موفقیت به‌روزرسانی شد!', 'success');
+                    }
+                } else {
+                    showNotification('لطفاً نام و ایمیل را وارد کنید.', 'error');
+                }
+            });
+            
+            // خروج از حساب کاربری
+            document.getElementById('logoutUserBtn').addEventListener('click', logout);
+        }
+        
+        // تنظیم پخش زنده دمو
+        function setupLiveDemo() {
+            // در حالت دمو، اگر کاربر وارد شده باشد، پخش زنده نمایش داده می‌شود
+            const livePlayer = document.getElementById('livePlayer');
+            
+            // شبیه‌سازی پخش زنده
+            setInterval(() => {
+                if (currentUser) {
+                    const liveIndicator = document.querySelector('.live-indicator');
+                    if (liveIndicator) {
+                        liveIndicator.style.animation = 'pulse 2s infinite';
+                    }
+                }
+            }, 2000);
+        }
+        
+        // خروج از حساب کاربری
+        function logout() {
+            currentUser = null;
+            isAdmin = false;
+            
+            // حذف از localStorage
+            localStorage.removeItem('newsSiteLoggedIn');
+            localStorage.removeItem('newsSiteUserData');
+            
+            // به‌روزرسانی UI
+            document.getElementById('loginBtn').style.display = 'inline-block';
+            document.getElementById('registerBtn').style.display = 'inline-block';
+            document.getElementById('userProfile').classList.add('d-none');
+            
+            // پنهان کردن پنل‌ها
+            document.getElementById('adminPanel').classList.remove('active');
+            document.getElementById('userPanel').classList.remove('active');
+            
+            // ریست کردن پخش زنده به حالت اولیه
+            const livePlayer = document.getElementById('livePlayer');
+            livePlayer.innerHTML = `
+                <div style="background-color: #000; color: white; height: 300px; display: flex; align-items: center; justify-content: center; border-radius: 5px;">
+                    <i class="fas fa-satellite-dish fa-3x" style="margin-left: 15px;"></i>
+                    <div>
+                        <h4>پخش زنده در حال انجام است</h4>
+                        <p>برای مشاهده پخش زنده، لطفاً وارد حساب کاربری خود شوید</p>
+                    </div>
+                </div>
+            `;
+            
+            showNotification('با موفقیت از حساب کاربری خارج شدید.', 'success');
+        }
+        
+        // نمایش نوتیفیکیشن
+        function showNotification(message, type) {
+            // ایجاد عنصر نوتیفیکیشن
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                left: 20px;
+                padding: 15px 25px;
+                background-color: ${type === 'success' ? '#27ae60' : '#e74c3c'};
+                color: white;
+                border-radius: 5px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+                z-index: 3000;
+                animation: fadeIn 0.3s ease, fadeOut 0.3s ease 2.7s;
+                font-weight: 600;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // حذف خودکار بعد از 3 ثانیه
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.parentNode.removeChild(notification);
+                }
+            }, 3000);
+        }
+        
+        // اضافه کردن استایل برای fadeOut
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeOut {
+                from { opacity: 1; transform: translateY(0); }
+                to { opacity: 0; transform: translateY(-20px); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
