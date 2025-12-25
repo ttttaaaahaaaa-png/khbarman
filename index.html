@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>خبرگزاری آنلاین | اخبار فوری، سیاسی، ورزشی</title>
-    <meta name="description" content="پایگاه خبری آنلاین با پوشش اخبار فوری، سیاسی، ورزشی، اقتصادی و فناوری. دریافت آخرین اخبار به صورت لحظه‌ای.">
-    <meta name="keywords" content="اخبار فوری, اخبار سیاسی, اخبار ورزشی, خبر آنلاین, تیتر روز, تحلیل خبر">
+    <title>پایگاه خبری موج | اخبار فوری، سیاسی، ورزشی</title>
+    <meta name="description" content="پایگاه خبری موج با پوشش جامع اخبار فوری، سیاسی، ورزشی، اقتصادی و فناوری. آخرین اخبار ایران و جهان به صورت لحظه‌ای.">
+    <meta name="keywords" content="اخبار فوری, اخبار سیاسی, اخبار ورزشی, خبرگزاری, موج خبر, تیتر اول">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -15,6 +15,9 @@
             --accent-color: #e74c3c;
             --sport-color: #27ae60;
             --political-color: #9b59b6;
+            --economic-color: #f39c12;
+            --tech-color: #1abc9c;
+            --urgent-color: #e74c3c;
             --light-color: #ecf0f1;
             --dark-color: #1a2530;
             --success-color: #27ae60;
@@ -59,9 +62,14 @@
             50% { transform: translateY(-10px); }
         }
         
-        @keyframes shimmer {
-            0% { background-position: -1000px 0; }
-            100% { background-position: 1000px 0; }
+        @keyframes wave {
+            0% { background-position-x: 0; }
+            100% { background-position-x: 1000px; }
+        }
+        
+        @keyframes wave2 {
+            0% { background-position-x: 0; }
+            100% { background-position-x: -1000px; }
         }
         
         /* استایل عمومی */
@@ -134,27 +142,65 @@
             background-color: #8e44ad;
         }
         
-        /* هدر و نوار ناوبری */
+        .btn-urgent {
+            background-color: var(--urgent-color);
+        }
+        
+        .btn-urgent:hover {
+            background-color: #c0392b;
+        }
+        
+        /* هدر با افکت موج دریا */
         header {
-            background-color: white;
-            box-shadow: var(--shadow);
+            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
+            color: white;
             position: sticky;
             top: 0;
             z-index: 1000;
             animation: fadeIn 1s ease;
+            overflow: hidden;
+        }
+        
+        .wave-container {
+            position: relative;
+            padding-bottom: 20px;
+        }
+        
+        .wave {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 100px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z' fill='%23f8f9fa'/%3E%3C/svg%3E");
+            background-size: 1000px 100px;
+            animation: wave 25s linear infinite;
+        }
+        
+        .wave2 {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 100px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z' fill='%23ffffff' opacity='0.5'/%3E%3C/svg%3E");
+            background-size: 1000px 100px;
+            animation: wave2 20s linear infinite;
         }
         
         .header-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 0;
+            padding: 20px 0 40px;
+            position: relative;
+            z-index: 2;
         }
         
         .logo {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: 800;
-            color: var(--primary-color);
+            color: white;
             display: flex;
             align-items: center;
             animation: slideInRight 0.8s ease;
@@ -162,12 +208,13 @@
         
         .logo i {
             margin-left: 10px;
-            color: var(--accent-color);
+            color: #3498db;
             animation: float 3s ease-in-out infinite;
         }
         
         .logo span {
-            color: var(--secondary-color);
+            color: #3498db;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
         
         nav ul {
@@ -180,10 +227,11 @@
         }
         
         nav ul li a {
-            color: var(--primary-color);
+            color: white;
             font-weight: 600;
             position: relative;
-            padding: 5px 0;
+            padding: 8px 0;
+            font-size: 16px;
         }
         
         nav ul li a::after {
@@ -192,12 +240,21 @@
             bottom: 0;
             right: 0;
             width: 0;
-            height: 2px;
-            background-color: var(--accent-color);
+            height: 3px;
+            background-color: #3498db;
             transition: var(--transition);
+            border-radius: 3px;
         }
         
         nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        nav ul li a.active {
+            color: #3498db;
+        }
+        
+        nav ul li a.active::after {
             width: 100%;
         }
         
@@ -218,22 +275,24 @@
         }
         
         .user-profile img {
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
             object-fit: cover;
             margin-left: 10px;
-            border: 2px solid var(--secondary-color);
+            border: 3px solid #3498db;
             transition: var(--transition);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
         }
         
         .user-profile:hover img {
-            transform: scale(1.1);
+            transform: scale(1.1) rotate(5deg);
         }
         
         .user-profile span {
             font-weight: 600;
-            color: var(--primary-color);
+            color: white;
+            font-size: 15px;
         }
         
         /* بخش اصلی */
@@ -276,6 +335,10 @@
             background-color: var(--political-color);
         }
         
+        .section-title.urgent-title::after {
+            background-color: var(--urgent-color);
+        }
+        
         .news-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -315,6 +378,7 @@
             font-size: 20px;
             margin-bottom: 10px;
             color: var(--primary-color);
+            line-height: 1.4;
         }
         
         .news-excerpt {
@@ -337,6 +401,23 @@
             padding: 30px 0;
             margin-bottom: 30px;
             border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .category-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: wave 20s infinite linear;
+        }
+        
+        .category-header.urgent {
+            background: linear-gradient(135deg, var(--urgent-color), #c0392b);
         }
         
         .category-header.sport {
@@ -348,21 +429,25 @@
         }
         
         .category-header.economic {
-            background: linear-gradient(135deg, var(--warning-color), #e67e22);
+            background: linear-gradient(135deg, var(--economic-color), #e67e22);
         }
         
         .category-header.tech {
-            background: linear-gradient(135deg, var(--secondary-color), #2980b9);
+            background: linear-gradient(135deg, var(--tech-color), #16a085);
         }
         
         .category-title {
             font-size: 32px;
             margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
         }
         
         .category-description {
             font-size: 18px;
             opacity: 0.9;
+            position: relative;
+            z-index: 1;
         }
         
         /* پخش زنده */
@@ -388,7 +473,7 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            animation: shimmer 3s infinite;
+            animation: wave 25s infinite linear;
         }
         
         .live-indicator {
@@ -399,6 +484,8 @@
             border-radius: 20px;
             margin-bottom: 15px;
             animation: pulse 2s infinite;
+            position: relative;
+            z-index: 1;
         }
         
         .live-indicator .dot {
@@ -412,11 +499,15 @@
         .live-title {
             font-size: 24px;
             margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
         }
         
         .live-description {
             margin-bottom: 20px;
             opacity: 0.9;
+            position: relative;
+            z-index: 1;
         }
         
         /* فوتر */
@@ -425,6 +516,18 @@
             color: white;
             padding: 40px 0 20px;
             margin-top: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
         }
         
         .footer-content {
@@ -491,10 +594,11 @@
             border-radius: 10px;
             overflow: hidden;
             animation: slideInRight 0.4s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
         
         .modal-header {
-            background-color: var(--primary-color);
+            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
             color: white;
             padding: 20px;
             display: flex;
@@ -668,6 +772,12 @@
             border-radius: 5px;
             margin-bottom: 10px;
             background-color: #f9f9f9;
+            transition: var(--transition);
+        }
+        
+        .user-item:hover {
+            transform: translateX(-5px);
+            box-shadow: var(--shadow);
         }
         
         .user-info {
@@ -681,6 +791,7 @@
             border-radius: 50%;
             object-fit: cover;
             margin-left: 15px;
+            border: 2px solid var(--secondary-color);
         }
         
         .user-details {
@@ -695,9 +806,10 @@
             border-radius: 3px;
             margin-top: 5px;
             font-size: 12px;
+            color: #e74c3c;
         }
         
-        /* صفحه افزودن خبر */
+        /* صفحه افزودن/ویرایش خبر */
         .add-news-page {
             display: none;
         }
@@ -755,6 +867,7 @@
             border-radius: 50%;
             object-fit: cover;
             border: 5px solid var(--secondary-color);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
         
         .change-avatar {
@@ -770,6 +883,12 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .change-avatar:hover {
+            background-color: var(--accent-color);
+            transform: scale(1.1);
         }
         
         /* نمایش ویدیو */
@@ -799,6 +918,7 @@
             padding: 30px;
             box-shadow: var(--shadow);
             margin-bottom: 30px;
+            animation: fadeIn 0.8s ease;
         }
         
         .news-detail-image {
@@ -807,6 +927,7 @@
             object-fit: cover;
             border-radius: 8px;
             margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         
         .news-detail-title {
@@ -833,6 +954,13 @@
             padding-top: 20px;
             border-top: 1px solid #eee;
             color: #888;
+        }
+        
+        /* دکمه‌های ویرایش و حذف */
+        .news-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
         }
         
         /* رسپانسیو */
@@ -895,35 +1023,42 @@
         .justify-between { justify-content: space-between; }
         .align-center { align-items: center; }
         .w-100 { width: 100%; }
+        .text-danger { color: var(--accent-color); }
+        .text-success { color: var(--success-color); }
+        .text-warning { color: var(--warning-color); }
     </style>
 </head>
 <body>
-    <!-- هدر -->
+    <!-- هدر با افکت موج دریا -->
     <header>
-        <div class="container header-container">
-            <div class="logo">
-                <i class="fas fa-broadcast-tower"></i>
-                خبرگزاری <span>آنلاین</span>
-            </div>
-            
-            <nav>
-                <ul>
-                    <li><a href="#" class="nav-link active" data-page="home">خانه</a></li>
-                    <li><a href="#" class="nav-link" data-page="urgent">اخبار فوری</a></li>
-                    <li><a href="#" class="nav-link" data-page="political">اخبار سیاسی</a></li>
-                    <li><a href="#" class="nav-link" data-page="sport">اخبار ورزشی</a></li>
-                    <li><a href="#" class="nav-link" data-page="economic">اقتصادی</a></li>
-                    <li><a href="#" class="nav-link" data-page="tech">فناوری</a></li>
-                </ul>
-            </nav>
-            
-            <div class="user-actions">
-                <button class="btn" id="loginBtn">ورود</button>
-                <button class="btn btn-success" id="registerBtn">ثبت‌نام</button>
+        <div class="wave-container">
+            <div class="wave"></div>
+            <div class="wave2"></div>
+            <div class="container header-container">
+                <div class="logo">
+                    <i class="fas fa-water"></i>
+                    پایگاه خبری <span>موج</span>
+                </div>
                 
-                <div class="user-profile d-none" id="userProfile">
-                    <img src="https://ui-avatars.com/api/?name=کاربر&background=3498db&color=fff" alt="پروفایل کاربر" id="userAvatar">
-                    <span id="userName">کاربر</span>
+                <nav>
+                    <ul>
+                        <li><a href="#" class="nav-link active" data-page="home">خانه</a></li>
+                        <li><a href="#" class="nav-link" data-page="urgent">اخبار فوری</a></li>
+                        <li><a href="#" class="nav-link" data-page="political">اخبار سیاسی</a></li>
+                        <li><a href="#" class="nav-link" data-page="sport">اخبار ورزشی</a></li>
+                        <li><a href="#" class="nav-link" data-page="economic">اقتصادی</a></li>
+                        <li><a href="#" class="nav-link" data-page="tech">فناوری</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="user-actions">
+                    <button class="btn" id="loginBtn">ورود</button>
+                    <button class="btn btn-success" id="registerBtn">ثبت‌نام</button>
+                    
+                    <div class="user-profile d-none" id="userProfile">
+                        <img src="https://ui-avatars.com/api/?name=کاربر&background=3498db&color=fff" alt="پروفایل کاربر" id="userAvatar">
+                        <span id="userName">کاربر</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -939,10 +1074,10 @@
                     <span class="dot"></span>
                     <span>پخش زنده</span>
                 </div>
-                <h3 class="live-title" id="liveTitle">گزارش زنده از نشست اضطراری مجلس</h3>
-                <p class="live-description" id="liveDescription">پوشش زنده نشست اضطراری مجلس شورای اسلامی درباره تحولات اقتصادی کشور. نمایندگان به صورت زنده نظرات خود را ارائه می‌دهند.</p>
+                <h3 class="live-title" id="liveTitle">گزارش زنده از نشست اضطراری مجلس درباره تحولات منطقه</h3>
+                <p class="live-description" id="liveDescription">پوشش زنده نشست اضطراری مجلس شورای اسلامی درباره تحولات منطقه‌ای و تصمیم‌گیری در مورد سیاست‌های خارجی کشور. نمایندگان به صورت زنده نظرات خود را ارائه می‌دهند.</p>
                 <div class="live-player" id="livePlayer">
-                    <div style="background-color: #000; color: white; height: 300px; display: flex; align-items: center; justify-content: center; border-radius: 5px;">
+                    <div style="background: linear-gradient(135deg, #000, #2c3e50); color: white; height: 300px; display: flex; align-items: center; justify-content: center; border-radius: 5px;">
                         <i class="fas fa-satellite-dish fa-3x" style="margin-left: 15px;"></i>
                         <div>
                             <h4>پخش زنده در حال انجام است</h4>
@@ -964,9 +1099,9 @@
 
     <!-- صفحه اخبار فوری -->
     <div class="main-content container d-none" id="urgentPage">
-        <div class="category-header">
+        <div class="category-header urgent">
             <h1 class="category-title">اخبار فوری</h1>
-            <p class="category-description">آخرین و مهم‌ترین اخبار فوری لحظه‌ای کشور و جهان</p>
+            <p class="category-description">آخرین و مهم‌ترین اخبار فوری لحظه‌ای کشور و جهان - به محض وقوع</p>
         </div>
         
         <div class="news-section">
@@ -976,7 +1111,7 @@
         </div>
         
         <div class="text-center mt-30">
-            <button class="btn btn-success" id="addUrgentNewsBtn">افزودن خبر فوری</button>
+            <button class="btn btn-urgent" id="addUrgentNewsBtn">+ افزودن خبر فوری جدید</button>
         </div>
     </div>
 
@@ -994,7 +1129,7 @@
         </div>
         
         <div class="text-center mt-30">
-            <button class="btn btn-political" id="addPoliticalNewsBtn">افزودن خبر سیاسی</button>
+            <button class="btn btn-political" id="addPoliticalNewsBtn">+ افزودن خبر سیاسی جدید</button>
         </div>
     </div>
 
@@ -1002,7 +1137,7 @@
     <div class="main-content container d-none" id="sportPage">
         <div class="category-header sport">
             <h1 class="category-title">اخبار ورزشی</h1>
-            <p class="category-description">پوشش جامع رویدادهای ورزشی داخلی و بین‌المللی</p>
+            <p class="category-description">پوشش جامع رویدادهای ورزشی داخلی و بین‌المللی - نتایج زنده مسابقات</p>
         </div>
         
         <div class="news-section">
@@ -1012,11 +1147,11 @@
         </div>
         
         <div class="text-center mt-30">
-            <button class="btn btn-sport" id="addSportNewsBtn">افزودن خبر ورزشی</button>
+            <button class="btn btn-sport" id="addSportNewsBtn">+ افزودن خبر ورزشی جدید</button>
         </div>
     </div>
 
-    <!-- صفحه افزودن خبر -->
+    <!-- صفحه افزودن/ویرایش خبر -->
     <div class="main-content container d-none" id="addNewsPage">
         <div class="add-news-header">
             <h1 class="section-title" id="addNewsTitle">افزودن خبر جدید</h1>
@@ -1038,13 +1173,13 @@
                 <div class="form-group">
                     <label for="newsImage">آدرس تصویر خبر:</label>
                     <input type="text" id="newsImage" class="form-control" placeholder="آدرس اینترنتی تصویر را وارد کنید">
-                    <small>می‌توانید از آدرس‌های نمونه مانند: https://images.unsplash.com/photo-1588681664899-f142ff2dc9b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80 استفاده کنید</small>
+                    <small class="text-warning">می‌توانید از آدرس‌های نمونه مانند: https://images.unsplash.com/photo-1588681664899-f142ff2dc9b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80 استفاده کنید</small>
                 </div>
                 
                 <div class="form-group">
                     <label for="newsVideo">آدرس ویدیو (اختیاری):</label>
                     <input type="text" id="newsVideo" class="form-control" placeholder="آدرس اینترنتی ویدیو را وارد کنید">
-                    <small>می‌توانید از آدرس‌های یوتیوب یا سایر سرویس‌های میزبانی ویدیو استفاده کنید</small>
+                    <small class="text-warning">می‌توانید از آدرس‌های یوتیوب یا سایر سرویس‌های میزبانی ویدیو استفاده کنید</small>
                 </div>
                 
                 <div class="form-group">
@@ -1053,7 +1188,15 @@
                     <input type="hidden" id="newsCategory">
                 </div>
                 
-                <button type="submit" class="btn btn-success w-100">انتشار خبر</button>
+                <div class="form-group">
+                    <label for="newsExcerpt">خلاصه خبر (اختیاری):</label>
+                    <textarea id="newsExcerpt" class="form-control" placeholder="خلاصه کوتاه خبر را وارد کنید (اگر خالی بگذارید، ۱۵۰ کاراکتر اول متن استفاده می‌شود)" rows="3"></textarea>
+                </div>
+                
+                <div class="d-flex justify-between">
+                    <button type="submit" class="btn btn-success">انتشار خبر</button>
+                    <button type="button" class="btn" id="previewNewsBtn">پیش‌نمایش</button>
+                </div>
             </form>
         </div>
     </div>
@@ -1062,7 +1205,10 @@
     <div class="admin-panel" id="adminPanel">
         <div class="admin-header">
             <h2>پنل مدیریت حرفه‌ای</h2>
-            <button class="btn btn-danger" id="logoutAdminBtn">خروج از حالت ادمین</button>
+            <div>
+                <button class="btn btn-danger" id="logoutAdminBtn">خروج از حساب</button>
+                <button class="btn" id="backToHomeFromAdminBtn">بازگشت به خانه</button>
+            </div>
         </div>
         
         <div class="admin-tabs">
@@ -1075,7 +1221,7 @@
         <div class="tab-content active" id="news-management">
             <h3 class="mb-20">اخبار منتشر شده</h3>
             <div class="form-group">
-                <input type="text" id="searchNews" class="form-control" placeholder="جستجوی اخبار...">
+                <input type="text" id="searchNews" class="form-control" placeholder="جستجوی اخبار بر اساس عنوان یا دسته‌بندی...">
             </div>
             
             <div id="publishedNews">
@@ -1084,9 +1230,9 @@
         </div>
         
         <div class="tab-content" id="user-management">
-            <h3 class="mb-20">مدیریت کاربران (با نمایش رمز عبور)</h3>
+            <h3 class="mb-20">مدیریت کاربران (نمایش کامل اطلاعات)</h3>
             <div class="form-group">
-                <input type="text" id="searchUser" class="form-control" placeholder="جستجوی کاربر...">
+                <input type="text" id="searchUser" class="form-control" placeholder="جستجوی کاربر بر اساس نام، ایمیل یا نقش...">
             </div>
             
             <ul class="user-list" id="userList">
@@ -1117,6 +1263,7 @@
             <div class="form-group">
                 <label for="liveStreamUrl">آدرس استریم:</label>
                 <input type="text" id="liveStreamUrl" class="form-control" placeholder="آدرس استریم را وارد کنید">
+                <small class="text-warning">برای تست می‌توانید از آدرس ویدیوی یوتیوب استفاده کنید</small>
             </div>
             
             <button type="button" class="btn btn-success" id="updateLiveBtn">به‌روزرسانی پخش زنده</button>
@@ -1126,17 +1273,17 @@
             <h3 class="mb-20">تنظیمات سایت</h3>
             <div class="form-group">
                 <label for="siteTitle">عنوان سایت:</label>
-                <input type="text" id="siteTitle" class="form-control" value="خبرگزاری آنلاین">
+                <input type="text" id="siteTitle" class="form-control" value="پایگاه خبری موج">
             </div>
             
             <div class="form-group">
                 <label for="siteDescription">توضیحات سایت (برای سئو):</label>
-                <textarea id="siteDescription" class="form-control">پایگاه خبری آنلاین با پوشش اخبار فوری، سیاسی، ورزشی، اقتصادی و فناوری. دریافت آخرین اخبار به صورت لحظه‌ای.</textarea>
+                <textarea id="siteDescription" class="form-control">پایگاه خبری موج با پوشش جامع اخبار فوری، سیاسی، ورزشی، اقتصادی و فناوری. آخرین اخبار ایران و جهان به صورت لحظه‌ای.</textarea>
             </div>
             
             <div class="form-group">
                 <label for="siteKeywords">کلمات کلیدی (با کاما جدا کنید):</label>
-                <textarea id="siteKeywords" class="form-control">اخبار فوری, اخبار سیاسی, اخبار ورزشی, خبر آنلاین, تیتر روز, تحلیل خبر</textarea>
+                <textarea id="siteKeywords" class="form-control">اخبار فوری, اخبار سیاسی, اخبار ورزشی, خبرگزاری, موج خبر, تیتر اول, خبر آنلاین</textarea>
             </div>
             
             <button type="button" class="btn btn-success" id="saveSettingsBtn">ذخیره تنظیمات</button>
@@ -1156,6 +1303,7 @@
                 <h2 id="profileName">کاربر عادی</h2>
                 <p id="profileEmail">user@example.com</p>
                 <p>عضویت از: <span id="joinDate">۱۴۰۲/۰۱/۱۵</span></p>
+                <p>نقش: <span id="profileRole" class="text-success">کاربر عادی</span></p>
             </div>
         </div>
         
@@ -1170,12 +1318,21 @@
         </div>
         
         <div class="form-group">
-            <label for="editUserPassword">تغییر رمز عبور (خالی بگذارید اگر نمی‌خواهید تغییر کند):</label>
-            <input type="password" id="editUserPassword" class="form-control" placeholder="رمز عبور جدید">
+            <label for="editUserPassword">تغییر رمز عبور:</label>
+            <input type="password" id="editUserPassword" class="form-control" placeholder="رمز عبور جدید (اگر تغییر نمی‌دهید خالی بگذارید)">
         </div>
         
-        <button type="button" class="btn btn-success" id="updateProfileBtn">به‌روزرسانی پروفایل</button>
-        <button type="button" class="btn btn-danger mt-20" id="logoutUserBtn">خروج از حساب کاربری</button>
+        <div class="d-flex justify-between">
+            <button type="button" class="btn btn-success" id="updateProfileBtn">به‌روزرسانی پروفایل</button>
+            <button type="button" class="btn btn-danger" id="logoutUserBtn">خروج از حساب کاربری</button>
+        </div>
+        
+        <div class="mt-30">
+            <h3 class="mb-20">اخبار منتشر شده توسط شما</h3>
+            <div id="userPublishedNews">
+                <!-- اخبار کاربر به صورت دینامیک نمایش داده می‌شود -->
+            </div>
+        </div>
     </div>
 
     <!-- فوتر -->
@@ -1183,33 +1340,31 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>درباره ما</h3>
-                    <p>خبرگزاری آنلاین با هدف ارائه آخرین اخبار و تحلیل‌های تحولات داخلی و بین‌المللی راه‌اندازی شده است.</p>
+                    <h3>درباره خبرگزاری موج</h3>
+                    <p>پایگاه خبری موج با هدف ارائه آخرین اخبار و تحلیل‌های تحولات داخلی و بین‌المللی با رویکردی حرفه‌ای و بی‌طرف راه‌اندازی شده است.</p>
                 </div>
                 
                 <div class="footer-section">
-                    <h3>لینک‌های سریع</h3>
+                    <h3>دسته‌بندی‌های خبری</h3>
                     <ul class="footer-links">
-                        <li><a href="#" class="nav-link" data-page="home">خانه</a></li>
                         <li><a href="#" class="nav-link" data-page="urgent">اخبار فوری</a></li>
                         <li><a href="#" class="nav-link" data-page="political">اخبار سیاسی</a></li>
                         <li><a href="#" class="nav-link" data-page="sport">اخبار ورزشی</a></li>
+                        <li><a href="#" class="nav-link" data-page="economic">اخبار اقتصادی</a></li>
+                        <li><a href="#" class="nav-link" data-page="tech">اخبار فناوری</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-section">
-                    <h3>شبکه‌های اجتماعی</h3>
-                    <div class="social-links">
-                        <a href="#" style="color: #ddd; font-size: 20px; margin-left: 15px;"><i class="fab fa-telegram"></i></a>
-                        <a href="#" style="color: #ddd; font-size: 20px; margin-left: 15px;"><i class="fab fa-instagram"></i></a>
-                        <a href="#" style="color: #ddd; font-size: 20px; margin-left: 15px;"><i class="fab fa-twitter"></i></a>
-                        <a href="#" style="color: #ddd; font-size: 20px; margin-left: 15px;"><i class="fab fa-youtube"></i></a>
-                    </div>
+                    <h3>ارتباط با ما</h3>
+                    <p><i class="fas fa-phone" style="margin-left: 10px;"></i> تلفن: ۰۲۱-۱۲۳۴۵۶۷۸</p>
+                    <p><i class="fas fa-envelope" style="margin-left: 10px;"></i> ایمیل: info@mojnews.ir</p>
+                    <p><i class="fas fa-map-marker-alt" style="margin-left: 10px;"></i> آدرس: تهران، خیابان ولیعصر</p>
                 </div>
             </div>
             
             <div class="copyright">
-                <p>کلیه حقوق این سایت متعلق به خبرگزاری آنلاین می‌باشد. © ۱۴۰۲</p>
+                <p>کلیه حقوق این سایت متعلق به پایگاه خبری موج می‌باشد. © ۱۴۰۲ - طراحی و توسعه با ❤️</p>
             </div>
         </div>
     </footer>
@@ -1246,8 +1401,8 @@
                     </p>
                     
                     <div class="text-center mt-20">
-                        <button type="button" class="btn" id="adminDemoBtn">ورود به عنوان ادمین (دمو)</button>
-                        <button type="button" class="btn btn-sport mt-10" id="userDemoBtn">ورود به عنوان کاربر (دمو)</button>
+                        <button type="button" class="btn btn-urgent" id="adminDemoBtn">ورود به عنوان ادمین (دمو)</button>
+                        <button type="button" class="btn btn-success mt-10" id="userDemoBtn">ورود به عنوان کاربر (دمو)</button>
                     </div>
                 </form>
             </div>
@@ -1258,7 +1413,7 @@
     <div class="modal" id="registerModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>ثبت‌نام در سایت</h2>
+                <h2>ثبت‌نام در خبرگزاری موج</h2>
                 <button class="close-modal">&times;</button>
             </div>
             <div class="modal-body">
@@ -1275,7 +1430,7 @@
                     
                     <div class="form-group">
                         <label for="registerPassword">رمز عبور:</label>
-                        <input type="password" id="registerPassword" class="form-control" required placeholder="رمز عبور">
+                        <input type="password" id="registerPassword" class="form-control" required placeholder="رمز عبور (حداقل ۶ کاراکتر)">
                     </div>
                     
                     <div class="form-group">
@@ -1298,6 +1453,7 @@
         let currentUser = null;
         let isAdmin = false;
         let currentCategory = 'home';
+        let editingNewsId = null;
         
         // داده‌های نمونه برای اخبار
         let newsData = {
@@ -1306,23 +1462,25 @@
                     id: 1,
                     title: "تصادف زنجیره‌ای در آزادراه تهران-شمال",
                     excerpt: "بر اثر بارش شدید باران، تصادف زنجیره‌ای در محور کندوان منجر به مسدود شدن این آزادراه شد.",
-                    content: "بر اثر بارش شدید باران در محور کندوان، یک تصادف زنجیره‌ای involving involving 15 خودرو رخ داد که منجر به مسدود شدن کامل این آزادراه شده است. امدادگران در حال انتقال مجروحان به بیمارستان‌های nearby هستند. به گزارش پلیس راه، احتمال بازگشایی مسیر تا ساعاتی دیگر وجود دارد.",
+                    content: "بر اثر بارش شدید باران در محور کندوان، یک تصادف زنجیره‌ای شامل ۱۵ خودرو رخ داد که منجر به مسدود شدن کامل این آزادراه شده است. امدادگران در حال انتقال مجروحان به بیمارستان‌های اطراف هستند. به گزارش پلیس راه، احتمال بازگشایی مسیر تا ساعاتی دیگر وجود دارد. مسئولان اورژانس از مردم خواسته‌اند تا از تردد غیرضروری در این محور خودداری کنند.",
                     image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                     video: "",
                     category: "urgent",
                     date: "۱۴۰۲/۰۲/۱۵ - ۱۴:۳۰",
-                    views: 3250
+                    views: 3250,
+                    authorId: 1
                 },
                 {
                     id: 2,
                     title: "قطعی برق گسترده در مناطق مرکزی تهران",
                     excerpt: "به دلیل نقص فنی در پست اصلی برق، مناطق مرکزی تهران با قطعی برق مواجه شدند.",
-                    content: "ساعت ۱۳ امروز به دلیل نقص فنی در پست اصلی برق منطقه ۶ تهران، قطعی گسترده‌ای در مناطق مرکزی پایتخت رخ داد. مسئولان شرکت برق منطقه‌ای اعلام کردند که تیم‌های فنی در حال رفع مشکل هستند و تا ساعاتی دیگر برق به طور کامل باز خواهد گشت.",
+                    content: "ساعت ۱۳ امروز به دلیل نقص فنی در پست اصلی برق منطقه ۶ تهران، قطعی گسترده‌ای در مناطق مرکزی پایتخت رخ داد. مسئولان شرکت برق منطقه‌ای اعلام کردند که تیم‌های فنی در حال رفع مشکل هستند و تا ساعاتی دیگر برق به طور کامل باز خواهد گشت. این قطعی برق بر عملکرد مراکز درمانی و اداری نیز تأثیر گذاشته است.",
                     image: "https://images.unsplash.com/photo-1629654291660-3c98113a0438?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                     video: "",
                     category: "urgent",
                     date: "۱۴۰۲/۰۲/۱۵ - ۱۳:۱۵",
-                    views: 2870
+                    views: 2870,
+                    authorId: 999
                 }
             ],
             political: [
@@ -1330,12 +1488,13 @@
                     id: 3,
                     title: "نشست اضطراری مجلس درباره تحریم‌های جدید",
                     excerpt: "نمایندگان مجلس امروز در نشستی اضطراری به بررسی تحریم‌های جدید علیه کشور پرداختند.",
-                    content: "نشست اضطراری مجلس شورای اسلامی امروز با حضور وزرای امور خارجه، اقتصاد و رئیس بانک مرکزی برگزار شد. در این جلسه راهکارهای مقابله با تحریم‌های جدید مورد بررسی قرار گرفت. رئیس مجلس در پایان جلسه از تصویب بسته حمایتی جدید برای بخش‌های آسیب‌پذیر خبر داد.",
+                    content: "نشست اضطراری مجلس شورای اسلامی امروز با حضور وزرای امور خارجه، اقتصاد و رئیس بانک مرکزی برگزار شد. در این جلسه راهکارهای مقابله با تحریم‌های جدید مورد بررسی قرار گرفت. رئیس مجلس در پایان جلسه از تصویب بسته حمایتی جدید برای بخش‌های آسیب‌پذیر خبر داد. این بسته شامل کمک‌های نقدی و تسهیلات ویژه برای تولیدکنندگان داخلی خواهد بود.",
                     image: "https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                     video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
                     category: "political",
                     date: "۱۴۰۲/۰۲/۱۴",
-                    views: 4200
+                    views: 4200,
+                    authorId: 999
                 }
             ],
             sport: [
@@ -1343,12 +1502,13 @@
                     id: 4,
                     title: "قهرمانی پرسپولیس در لیگ برتر فوتبال",
                     excerpt: "تیم فوتبال پرسپولیس با پیروزی مقابل استقلال، برای سومین سال متوالی قهرمان لیگ برتر شد.",
-                    content: "در دربی حساسی تهران، تیم فوتبال پرسپولیس با نتیجه ۲ بر ۱ استقلال را شکست داد و برای سومین سال متوالی عنوان قهرمانی لیگ برتر فوتبال ایران را از آن خود کرد. این بازی که با حضور ۸۰ هزار تماشاگر در ورزشگاه آزادی برگزار شد، یکی از جذابترین دربی‌های تاریخ فوتبال ایران لقب گرفت.",
+                    content: "در دربی حساسی تهران، تیم فوتبال پرسپولیس با نتیجه ۲ بر ۱ استقلال را شکست داد و برای سومین سال متوالی عنوان قهرمانی لیگ برتر فوتبال ایران را از آن خود کرد. این بازی که با حضور ۸۰ هزار تماشاگر در ورزشگاه آزادی برگزار شد، یکی از جذابترین دربی‌های تاریخ فوتبال ایران لقب گرفت. گل پیروزی پرسپولیس در دقیقه ۸۵ به ثمر رسید.",
                     image: "https://images.unsplash.com/photo-1575361204480-aadea25e6e68?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                     video: "https://www.youtube.com/embed/dQw4w9WgXcQ",
                     category: "sport",
                     date: "۱۴۰۲/۰۲/۱۳",
-                    views: 12500
+                    views: 12500,
+                    authorId: 2
                 }
             ],
             economic: [
@@ -1356,12 +1516,13 @@
                     id: 5,
                     title: "رشد ۵ درصدی شاخص بورس در هفته گذشته",
                     excerpt: "شاخص کل بورس تهران در هفته گذشته با رشد ۵ درصدی همراه بود.",
-                    content: "با انتشار گزارش‌های مثبت از عملکرد شرکت‌های بزرگ تولیدی، شاخص کل بورس تهران در هفته گذشته رشد ۵ درصدی را تجربه کرد. بیشترین رشد مربوط به گروه خودرویی و پتروشیمی بود. تحلیلگران اقتصادی پیش‌بینی کرده‌اند این روند صعودی در هفته جاری نیز ادامه خواهد داشت.",
+                    content: "با انتشار گزارش‌های مثبت از عملکرد شرکت‌های بزرگ تولیدی، شاخص کل بورس تهران در هفته گذشته رشد ۵ درصدی را تجربه کرد. بیشترین رشد مربوط به گروه خودرویی و پتروشیمی بود. تحلیلگران اقتصادی پیش‌بینی کرده‌اند این روند صعودی در هفته جاری نیز ادامه خواهد داشت. ارزش معاملات روزانه نیز به بیش از ۸ هزار میلیارد تومان رسید.",
                     image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                     video: "",
                     category: "economic",
                     date: "۱۴۰۲/۰۲/۱۲",
-                    views: 3400
+                    views: 3400,
+                    authorId: 999
                 }
             ],
             tech: [
@@ -1369,12 +1530,13 @@
                     id: 6,
                     title: "رونمایی از گوشی هوشمند جدید ایرانی",
                     excerpt: "شرکت دانش‌بنیان ایرانی از گوشی هوشمند جدید با پردازنده بومی رونمایی کرد.",
-                    content: "در مراسمی با حضور وزیر ارتباطات، یک شرکت دانش‌بنیان ایرانی از گوشی هوشمند جدید خود با پردازنده بومی رونمایی کرد. این گوشی که با سیستم عامل ایرانی عرضه می‌شود، دارای امنیت اطلاعاتی بالا و قیمت مناسب است. پیش‌فروش این محصول از هفته آینده آغاز خواهد شد.",
+                    content: "در مراسمی با حضور وزیر ارتباطات، یک شرکت دانش‌بنیان ایرانی از گوشی هوشمند جدید خود با پردازنده بومی رونمایی کرد. این گوشی که با سیستم عامل ایرانی عرضه می‌شود، دارای امنیت اطلاعاتی بالا و قیمت مناسب است. پیش‌فروش این محصول از هفته آینده آغاز خواهد شد. وزیر ارتباطات در این مراسم از برنامه‌های دولت برای حمایت از تولیدات داخلی در حوزه فناوری خبر داد.",
                     image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
                     video: "",
                     category: "tech",
                     date: "۱۴۰۲/۰۲/۱۱",
-                    views: 5600
+                    views: 5600,
+                    authorId: 999
                 }
             ]
         };
@@ -1419,6 +1581,9 @@
             
             // نمایش پخش زنده دمو
             setupLiveDemo();
+            
+            // اضافه کردن متن‌های پیش‌فرض
+            setupDefaultContent();
         });
         
         // بارگذاری اخبار برای دسته‌بندی مشخص
@@ -1442,7 +1607,20 @@
             container.innerHTML = '';
             
             if (newsArray.length === 0) {
-                container.innerHTML = '<div class="text-center" style="grid-column: 1/-1; padding: 40px; background: #f9f9f9; border-radius: 8px;"><h3>هیچ خبری در این دسته‌بندی وجود ندارد</h3><p>اولین خبر را اضافه کنید!</p></div>';
+                container.innerHTML = `
+                    <div class="text-center" style="grid-column: 1/-1; padding: 40px; background: #f9f9f9; border-radius: 8px;">
+                        <i class="fas fa-newspaper fa-3x mb-20" style="color: #ccc;"></i>
+                        <h3>هیچ خبری در این دسته‌بندی وجود ندارد</h3>
+                        <p class="mt-20">اولین خبر را منتشر کنید!</p>
+                        ${currentUser ? `<button class="btn btn-success mt-20" id="addFirstNewsBtn">افزودن اولین خبر</button>` : ''}
+                    </div>
+                `;
+                
+                if (document.getElementById('addFirstNewsBtn')) {
+                    document.getElementById('addFirstNewsBtn').addEventListener('click', () => {
+                        showAddNewsPage(category);
+                    });
+                }
                 return;
             }
             
@@ -1460,9 +1638,30 @@
                             <span><i class="far fa-eye"></i> ${news.views.toLocaleString()}</span>
                         </div>
                         ${news.video ? '<div class="mt-10"><span class="btn btn-success btn-sm"><i class="fas fa-video"></i> دارای ویدیو</span></div>' : ''}
+                        ${(currentUser && (currentUser.id === news.authorId || isAdmin)) ? `
+                            <div class="news-actions">
+                                <button class="btn btn-success btn-sm edit-news-btn" data-id="${news.id}">ویرایش</button>
+                                <button class="btn btn-danger btn-sm delete-news-btn" data-id="${news.id}">حذف</button>
+                            </div>
+                        ` : ''}
                     </div>
                 `;
                 container.appendChild(newsCard);
+            });
+            
+            // اضافه کردن رویداد به دکمه‌های ویرایش و حذف
+            document.querySelectorAll('.edit-news-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const newsId = parseInt(this.getAttribute('data-id'));
+                    editNews(newsId);
+                });
+            });
+            
+            document.querySelectorAll('.delete-news-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const newsId = parseInt(this.getAttribute('data-id'));
+                    deleteNews(newsId);
+                });
             });
         }
         
@@ -1490,9 +1689,15 @@
                 updateUIForLoggedInUser();
                 
                 if (isAdmin) {
-                    showAdminPanel();
+                    // نمایش پنل مدیریت اگر کاربر در صفحه خانه باشد
+                    if (currentCategory === 'home') {
+                        showAdminPanel();
+                    }
                 } else {
-                    showUserPanel();
+                    // نمایش پنل کاربری اگر کاربر در صفحه خانه باشد
+                    if (currentCategory === 'home') {
+                        showUserPanel();
+                    }
                 }
             }
         }
@@ -1600,6 +1805,11 @@
                 const confirmPassword = document.getElementById('registerConfirmPassword').value;
                 
                 if (name && email && password && confirmPassword) {
+                    if (password.length < 6) {
+                        showNotification('رمز عبور باید حداقل ۶ کاراکتر باشد.', 'error');
+                        return;
+                    }
+                    
                     if (password !== confirmPassword) {
                         showNotification('رمز عبور و تکرار آن مطابقت ندارند.', 'error');
                         return;
@@ -1691,6 +1901,9 @@
             
             // بارگذاری کاربران
             loadUsersForAdmin();
+            
+            // به‌روزرسانی اطلاعات پنل مدیریت
+            updateAdminPanelInfo();
         }
         
         // نمایش پنل کاربری
@@ -1707,10 +1920,15 @@
             document.getElementById('profileName').textContent = currentUser.name;
             document.getElementById('profileEmail').textContent = currentUser.email;
             document.getElementById('joinDate').textContent = currentUser.joinDate;
+            document.getElementById('profileRole').textContent = currentUser.role === 'admin' ? 'مدیر سیستم' : 'کاربر عادی';
+            document.getElementById('profileRole').className = currentUser.role === 'admin' ? 'text-danger' : 'text-success';
             document.getElementById('profileAvatar').src = currentUser.avatar || generateRandomAvatar(currentUser.name);
             
             document.getElementById('editUserName').value = currentUser.name;
             document.getElementById('editUserEmail').value = currentUser.email;
+            
+            // بارگذاری اخبار کاربر
+            loadUserPublishedNews();
         }
         
         // مخفی کردن همه صفحات
@@ -1768,10 +1986,15 @@
             document.getElementById('addUrgentNewsBtn').addEventListener('click', () => showAddNewsPage('urgent'));
             document.getElementById('addPoliticalNewsBtn').addEventListener('click', () => showAddNewsPage('political'));
             document.getElementById('addSportNewsBtn').addEventListener('click', () => showAddNewsPage('sport'));
+            
+            // دکمه بازگشت از پنل مدیریت به خانه
+            document.getElementById('backToHomeFromAdminBtn').addEventListener('click', () => {
+                showPage('home');
+            });
         }
         
-        // نمایش صفحه افزودن خبر
-        function showAddNewsPage(category) {
+        // نمایش صفحه افزودن/ویرایش خبر
+        function showAddNewsPage(category, newsId = null) {
             // فقط اگر کاربر وارد شده باشد
             if (!currentUser) {
                 showNotification('لطفاً ابتدا وارد حساب کاربری خود شوید.', 'error');
@@ -1787,20 +2010,45 @@
             document.getElementById('newsCategoryDisplay').textContent = getCategoryName(category);
             
             // تنظیم عنوان صفحه
-            document.getElementById('addNewsTitle').textContent = `افزودن خبر ${getCategoryName(category)}`;
-            
-            // پاک کردن فرم
-            document.getElementById('addNewsForm').reset();
+            if (newsId) {
+                editingNewsId = newsId;
+                document.getElementById('addNewsTitle').textContent = `ویرایش خبر ${getCategoryName(category)}`;
+                
+                // پیدا کردن خبر برای ویرایش
+                let newsToEdit = null;
+                for (const cat in newsData) {
+                    const foundNews = newsData[cat].find(news => news.id === newsId);
+                    if (foundNews) {
+                        newsToEdit = foundNews;
+                        break;
+                    }
+                }
+                
+                if (newsToEdit) {
+                    // پر کردن فرم با اطلاعات خبر
+                    document.getElementById('newsTitle').value = newsToEdit.title;
+                    document.getElementById('newsContent').value = newsToEdit.content;
+                    document.getElementById('newsImage').value = newsToEdit.image || '';
+                    document.getElementById('newsVideo').value = newsToEdit.video || '';
+                    document.getElementById('newsExcerpt').value = newsToEdit.excerpt || '';
+                }
+            } else {
+                editingNewsId = null;
+                document.getElementById('addNewsTitle').textContent = `افزودن خبر ${getCategoryName(category)}`;
+                
+                // پاک کردن فرم
+                document.getElementById('addNewsForm').reset();
+            }
         }
         
-        // رویدادهای صفحه افزودن خبر
+        // رویدادهای صفحه افزودن/ویرایش خبر
         function setupAddNewsEvents() {
             // دکمه بازگشت
             document.getElementById('backToCategoryBtn').addEventListener('click', () => {
                 showPage(currentCategory);
             });
             
-            // فرم افزودن خبر
+            // فرم افزودن/ویرایش خبر
             document.getElementById('addNewsForm').addEventListener('submit', (e) => {
                 e.preventDefault();
                 
@@ -1809,29 +2057,75 @@
                 const image = document.getElementById('newsImage').value;
                 const video = document.getElementById('newsVideo').value;
                 const category = document.getElementById('newsCategory').value;
+                const excerpt = document.getElementById('newsExcerpt').value;
                 
                 if (title && content && category) {
-                    // ایجاد خبر جدید
-                    const newNews = {
-                        id: Date.now(),
-                        title: title,
-                        excerpt: content.length > 150 ? content.substring(0, 150) + '...' : content,
-                        content: content,
-                        image: image || 'https://images.unsplash.com/photo-1588681664899-f142ff2dc9b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-                        video: video,
-                        category: category,
-                        date: new Date().toLocaleDateString('fa-IR') + ' - ' + new Date().toLocaleTimeString('fa-IR', {hour: '2-digit', minute:'2-digit'}),
-                        views: 0
-                    };
-                    
-                    // اضافه کردن به لیست اخبار
-                    if (!newsData[category]) {
-                        newsData[category] = [];
+                    if (editingNewsId) {
+                        // ویرایش خبر موجود
+                        let newsUpdated = false;
+                        for (const cat in newsData) {
+                            const newsIndex = newsData[cat].findIndex(news => news.id === editingNewsId);
+                            if (newsIndex !== -1) {
+                                // اگر دسته‌بندی تغییر کرده، خبر را به دسته‌بندی جدید منتقل می‌کنیم
+                                if (cat !== category) {
+                                    const newsToMove = newsData[cat][newsIndex];
+                                    newsData[cat].splice(newsIndex, 1);
+                                    
+                                    // اضافه کردن به دسته‌بندی جدید
+                                    if (!newsData[category]) {
+                                        newsData[category] = [];
+                                    }
+                                    newsData[category].push({
+                                        ...newsToMove,
+                                        title,
+                                        content,
+                                        image: image || newsToMove.image,
+                                        video,
+                                        category,
+                                        excerpt: excerpt || content.substring(0, 150) + '...'
+                                    });
+                                } else {
+                                    // فقط به‌روزرسانی خبر در همان دسته‌بندی
+                                    newsData[cat][newsIndex] = {
+                                        ...newsData[cat][newsIndex],
+                                        title,
+                                        content,
+                                        image: image || newsData[cat][newsIndex].image,
+                                        video,
+                                        excerpt: excerpt || content.substring(0, 150) + '...'
+                                    };
+                                }
+                                newsUpdated = true;
+                                break;
+                            }
+                        }
+                        
+                        if (newsUpdated) {
+                            showNotification(`خبر ${getCategoryName(category)} با موفقیت ویرایش شد!`, 'success');
+                        }
+                    } else {
+                        // ایجاد خبر جدید
+                        const newNews = {
+                            id: Date.now(),
+                            title: title,
+                            excerpt: excerpt || (content.length > 150 ? content.substring(0, 150) + '...' : content),
+                            content: content,
+                            image: image || 'https://images.unsplash.com/photo-1588681664899-f142ff2dc9b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                            video: video,
+                            category: category,
+                            date: new Date().toLocaleDateString('fa-IR') + ' - ' + new Date().toLocaleTimeString('fa-IR', {hour: '2-digit', minute:'2-digit'}),
+                            views: 0,
+                            authorId: currentUser.id
+                        };
+                        
+                        // اضافه کردن به لیست اخبار
+                        if (!newsData[category]) {
+                            newsData[category] = [];
+                        }
+                        newsData[category].unshift(newNews);
+                        
+                        showNotification(`خبر ${getCategoryName(category)} با موفقیت اضافه شد!`, 'success');
                     }
-                    newsData[category].unshift(newNews);
-                    
-                    // نمایش پیام موفقیت
-                    showNotification(`خبر ${getCategoryName(category)} با موفقیت اضافه شد!`, 'success');
                     
                     // بازگشت به صفحه دسته‌بندی
                     showPage(category);
@@ -1839,6 +2133,64 @@
                     showNotification('لطفاً عنوان و محتوای خبر را وارد کنید.', 'error');
                 }
             });
+            
+            // دکمه پیش‌نمایش
+            document.getElementById('previewNewsBtn').addEventListener('click', function() {
+                const title = document.getElementById('newsTitle').value;
+                const content = document.getElementById('newsContent').value;
+                
+                if (title && content) {
+                    alert(`پیش‌نمایش خبر:\n\nعنوان: ${title}\n\nمحتوا: ${content.substring(0, 200)}...`);
+                } else {
+                    showNotification('لطفاً ابتدا عنوان و محتوای خبر را وارد کنید.', 'error');
+                }
+            });
+        }
+        
+        // ویرایش خبر
+        function editNews(newsId) {
+            // پیدا کردن دسته‌بندی خبر
+            let newsCategory = null;
+            for (const category in newsData) {
+                const foundNews = newsData[category].find(news => news.id === newsId);
+                if (foundNews) {
+                    newsCategory = category;
+                    break;
+                }
+            }
+            
+            if (newsCategory) {
+                showAddNewsPage(newsCategory, newsId);
+            }
+        }
+        
+        // حذف خبر
+        function deleteNews(newsId) {
+            if (confirm('آیا از حذف این خبر اطمینان دارید؟ این عمل قابل برگشت نیست.')) {
+                // جستجو و حذف خبر از همه دسته‌بندی‌ها
+                for (const category in newsData) {
+                    const newsIndex = newsData[category].findIndex(news => news.id === newsId);
+                    if (newsIndex !== -1) {
+                        newsData[category].splice(newsIndex, 1);
+                        break;
+                    }
+                }
+                
+                // بارگذاری مجدد
+                loadNewsForCategory(currentCategory);
+                
+                // اگر در پنل مدیریت هستیم، آنجا را هم به‌روز کنیم
+                if (document.getElementById('adminPanel').classList.contains('active')) {
+                    loadPublishedNews();
+                }
+                
+                // اگر در پنل کاربری هستیم، آنجا را هم به‌روز کنیم
+                if (document.getElementById('userPanel').classList.contains('active')) {
+                    loadUserPublishedNews();
+                }
+                
+                showNotification('خبر با موفقیت حذف شد!', 'success');
+            }
         }
         
         // رویدادهای پنل مدیریت
@@ -1901,7 +2253,7 @@
                         `;
                     } else {
                         livePlayerElement.innerHTML = `
-                            <div style="background-color: #000; color: white; height: 300px; display: flex; align-items: center; justify-content: center; border-radius: 5px;">
+                            <div style="background: linear-gradient(135deg, #000, #2c3e50); color: white; height: 300px; display: flex; align-items: center; justify-content: center; border-radius: 5px;">
                                 <i class="fas fa-satellite-dish fa-3x" style="margin-left: 15px;"></i>
                                 <div>
                                     <h4>پخش زنده در حال انجام است</h4>
@@ -1925,8 +2277,9 @@
                 userItems.forEach(item => {
                     const userName = item.querySelector('h4').textContent.toLowerCase();
                     const userEmail = item.querySelector('p').textContent.toLowerCase();
+                    const userRole = item.querySelector('span').textContent.toLowerCase();
                     
-                    if (userName.includes(searchTerm) || userEmail.includes(searchTerm)) {
+                    if (userName.includes(searchTerm) || userEmail.includes(searchTerm) || userRole.includes(searchTerm)) {
                         item.style.display = 'flex';
                     } else {
                         item.style.display = 'none';
@@ -1936,7 +2289,7 @@
             
             // حذف کاربر (در حالت دمو فقط از رابط کاربری حذف می‌شود)
             document.addEventListener('click', function(e) {
-                if (e.target.classList.contains('delete-user')) {
+                if (e.target.classList.contains('delete-user-btn')) {
                     const userId = parseInt(e.target.getAttribute('data-id'));
                     
                     // جلوگیری از حذف خود ادمین
@@ -1945,35 +2298,53 @@
                         return;
                     }
                     
-                    const userIndex = usersData.findIndex(user => user.id === userId);
+                    // جلوگیری از حذف خود کاربر جاری
+                    if (userId === currentUser.id) {
+                        showNotification('نمی‌توانید حساب کاربری خود را حذف کنید.', 'error');
+                        return;
+                    }
                     
-                    if (userIndex !== -1) {
-                        usersData.splice(userIndex, 1);
-                        loadUsersForAdmin();
-                        showNotification('کاربر با موفقیت حذف شد!', 'success');
+                    if (confirm('آیا از حذف این کاربر اطمینان دارید؟ این عمل قابل برگشت نیست.')) {
+                        const userIndex = usersData.findIndex(user => user.id === userId);
+                        
+                        if (userIndex !== -1) {
+                            usersData.splice(userIndex, 1);
+                            loadUsersForAdmin();
+                            showNotification('کاربر با موفقیت حذف شد!', 'success');
+                        }
                     }
                 }
             });
             
-            // حذف خبر
+            // حذف خبر از پنل مدیریت
             document.addEventListener('click', function(e) {
-                if (e.target.classList.contains('delete-news')) {
+                if (e.target.classList.contains('admin-delete-news')) {
                     const newsId = parseInt(e.target.getAttribute('data-id'));
                     
-                    // جستجو و حذف خبر از همه دسته‌بندی‌ها
-                    for (const category in newsData) {
-                        const newsIndex = newsData[category].findIndex(news => news.id === newsId);
-                        if (newsIndex !== -1) {
-                            newsData[category].splice(newsIndex, 1);
-                            break;
+                    if (confirm('آیا از حذف این خبر اطمینان دارید؟ این عمل قابل برگشت نیست.')) {
+                        // جستجو و حذف خبر از همه دسته‌بندی‌ها
+                        for (const category in newsData) {
+                            const newsIndex = newsData[category].findIndex(news => news.id === newsId);
+                            if (newsIndex !== -1) {
+                                newsData[category].splice(newsIndex, 1);
+                                break;
+                            }
                         }
+                        
+                        // بارگذاری مجدد
+                        loadPublishedNews();
+                        loadNewsForCategory(currentCategory);
+                        
+                        showNotification('خبر با موفقیت حذف شد!', 'success');
                     }
-                    
-                    // بارگذاری مجدد
-                    loadPublishedNews();
-                    loadNewsForCategory(currentCategory);
-                    
-                    showNotification('خبر با موفقیت حذف شد!', 'success');
+                }
+            });
+            
+            // ویرایش خبر از پنل مدیریت
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('admin-edit-news')) {
+                    const newsId = parseInt(e.target.getAttribute('data-id'));
+                    editNews(newsId);
                 }
             });
             
@@ -1991,12 +2362,12 @@
                 document.querySelector('meta[name="keywords"]').setAttribute('content', siteKeywords);
                 
                 // به‌روزرسانی لوگو
-                document.querySelector('.logo span').textContent = siteTitle.split(' ')[0] || 'آنلاین';
+                document.querySelector('.logo span').textContent = siteTitle.split(' ')[0] || 'موج';
                 
                 showNotification('تنظیمات سایت با موفقیت ذخیره شد!', 'success');
             });
             
-            // خروج از حالت ادمین
+            // خروج از حساب در پنل مدیریت
             document.getElementById('logoutAdminBtn').addEventListener('click', logout);
         }
         
@@ -2008,7 +2379,8 @@
             // جمع‌آوری همه اخبار از همه دسته‌بندی‌ها
             let allNews = [];
             for (const category in newsData) {
-                allNews = [...allNews, ...newsData[category]];
+                const categoryNews = newsData[category].map(news => ({...news, category}));
+                allNews = [...allNews, ...categoryNews];
             }
             
             // مرتب‌سازی بر اساس تاریخ (جدیدترین اول)
@@ -2020,6 +2392,9 @@
             }
             
             allNews.forEach(news => {
+                const author = usersData.find(u => u.id === news.authorId);
+                const authorName = author ? author.name : 'ناشناس';
+                
                 const newsItem = document.createElement('div');
                 newsItem.className = 'news-item';
                 newsItem.style.cssText = 'background: #f9f9f9; padding: 15px; border-radius: 5px; margin-bottom: 15px;';
@@ -2027,14 +2402,16 @@
                     <div class="d-flex justify-between align-center">
                         <div style="flex: 1;">
                             <h4>${news.title}</h4>
-                            <div class="d-flex mt-5">
+                            <div class="d-flex mt-5 align-center">
                                 <span class="news-category" style="background: #e0e0e0; padding: 2px 8px; border-radius: 3px; font-size: 12px;">${getCategoryName(news.category)}</span>
                                 <span style="margin-right: 15px; color: #666; font-size: 14px;">${news.date.split(' - ')[0]}</span>
                                 <span style="color: #666; font-size: 14px;"><i class="far fa-eye"></i> ${news.views.toLocaleString()}</span>
+                                <span style="margin-right: 15px; color: #666; font-size: 14px;">نویسنده: ${authorName}</span>
                             </div>
                         </div>
                         <div>
-                            <button class="btn btn-danger btn-sm delete-news" data-id="${news.id}">حذف</button>
+                            <button class="btn btn-success btn-sm admin-edit-news" data-id="${news.id}">ویرایش</button>
+                            <button class="btn btn-danger btn-sm admin-delete-news" data-id="${news.id}">حذف</button>
                         </div>
                     </div>
                 `;
@@ -2059,17 +2436,119 @@
                     <div class="user-info">
                         <img src="${user.avatar}" alt="${user.name}">
                         <div class="user-details">
-                            <h4>${user.name} ${user.role === 'admin' ? '<span style="background: #e74c3c; color: white; padding: 2px 8px; border-radius: 3px; font-size: 12px;">ادمین</span>' : ''}</h4>
+                            <h4>${user.name} ${user.role === 'admin' ? '<span style="background: #e74c3c; color: white; padding: 2px 8px; border-radius: 3px; font-size: 12px;">ادمین</span>' : '<span style="background: #27ae60; color: white; padding: 2px 8px; border-radius: 3px; font-size: 12px;">کاربر</span>'}</h4>
                             <p>${user.email}</p>
-                            <div class="user-password">رمز: ${user.password}</div>
-                            <small>عضویت از: ${user.joinDate}</small>
+                            <div class="user-password">رمز عبور: ${user.password}</div>
+                            <small>عضویت از: ${user.joinDate} | شناسه: ${user.id}</small>
                         </div>
                     </div>
                     <div>
-                        ${user.id !== 999 ? `<button class="btn btn-danger btn-sm delete-user" data-id="${user.id}">حذف کاربر</button>` : ''}
+                        ${user.id !== 999 && user.id !== currentUser.id ? `<button class="btn btn-danger btn-sm delete-user-btn" data-id="${user.id}">حذف کاربر</button>` : ''}
                     </div>
                 `;
                 userList.appendChild(userItem);
+            });
+        }
+        
+        // به‌روزرسانی اطلاعات پنل مدیریت
+        function updateAdminPanelInfo() {
+            // محاسبه آمار
+            let totalNews = 0;
+            for (const category in newsData) {
+                totalNews += newsData[category].length;
+            }
+            
+            const totalUsers = usersData.length;
+            const adminUsers = usersData.filter(u => u.role === 'admin').length;
+            const regularUsers = totalUsers - adminUsers;
+            
+            // نمایش آمار در تب مدیریت اخبار
+            const newsManagementTab = document.getElementById('news-management');
+            const statsHtml = `
+                <div class="d-flex justify-between mb-20" style="background: linear-gradient(135deg, #f8f9fa, #e9ecef); padding: 15px; border-radius: 8px;">
+                    <div class="text-center">
+                        <h3 class="text-danger">${totalNews}</h3>
+                        <p>تعداد کل اخبار</p>
+                    </div>
+                    <div class="text-center">
+                        <h3 class="text-success">${totalUsers}</h3>
+                        <p>تعداد کاربران</p>
+                    </div>
+                    <div class="text-center">
+                        <h3 class="text-warning">${adminUsers}</h3>
+                        <p>تعداد ادمین‌ها</p>
+                    </div>
+                </div>
+            `;
+            
+            // اگر آمار هنوز نمایش داده نشده، اضافه کن
+            if (!document.querySelector('.admin-stats')) {
+                newsManagementTab.insertAdjacentHTML('afterbegin', statsHtml.replace('mb-20', 'mb-20 admin-stats'));
+            }
+        }
+        
+        // بارگذاری اخبار منتشر شده توسط کاربر
+        function loadUserPublishedNews() {
+            const userPublishedNewsContainer = document.getElementById('userPublishedNews');
+            if (!userPublishedNewsContainer) return;
+            
+            userPublishedNewsContainer.innerHTML = '';
+            
+            if (!currentUser) return;
+            
+            // جمع‌آوری اخبار کاربر
+            let userNews = [];
+            for (const category in newsData) {
+                const categoryNews = newsData[category]
+                    .filter(news => news.authorId === currentUser.id)
+                    .map(news => ({...news, category}));
+                userNews = [...userNews, ...categoryNews];
+            }
+            
+            // مرتب‌سازی بر اساس تاریخ (جدیدترین اول)
+            userNews.sort((a, b) => b.id - a.id);
+            
+            if (userNews.length === 0) {
+                userPublishedNewsContainer.innerHTML = '<div class="text-center" style="padding: 20px; background: #f9f9f9; border-radius: 8px;"><p>شما هنوز خبری منتشر نکرده‌اید.</p></div>';
+                return;
+            }
+            
+            userNews.forEach(news => {
+                const newsItem = document.createElement('div');
+                newsItem.className = 'news-item';
+                newsItem.style.cssText = 'background: #f9f9f9; padding: 15px; border-radius: 5px; margin-bottom: 10px;';
+                newsItem.innerHTML = `
+                    <div class="d-flex justify-between align-center">
+                        <div style="flex: 1;">
+                            <h5>${news.title}</h5>
+                            <div class="d-flex mt-5">
+                                <span style="background: #e0e0e0; padding: 2px 8px; border-radius: 3px; font-size: 12px;">${getCategoryName(news.category)}</span>
+                                <span style="margin-right: 15px; color: #666; font-size: 12px;">${news.date.split(' - ')[0]}</span>
+                                <span style="color: #666; font-size: 12px;"><i class="far fa-eye"></i> ${news.views.toLocaleString()}</span>
+                            </div>
+                        </div>
+                        <div>
+                            <button class="btn btn-success btn-sm edit-user-news" data-id="${news.id}">ویرایش</button>
+                            <button class="btn btn-danger btn-sm delete-user-news" data-id="${news.id}">حذف</button>
+                        </div>
+                    </div>
+                `;
+                userPublishedNewsContainer.appendChild(newsItem);
+            });
+            
+            // اضافه کردن رویداد به دکمه‌های ویرایش و حذف
+            document.querySelectorAll('.edit-user-news').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const newsId = parseInt(this.getAttribute('data-id'));
+                    editNews(newsId);
+                });
+            });
+            
+            document.querySelectorAll('.delete-user-news').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const newsId = parseInt(this.getAttribute('data-id'));
+                    deleteNews(newsId);
+                });
             });
         }
         
@@ -2113,6 +2592,10 @@
                         
                         // اگر رمز عبور جدید وارد شده
                         if (newPassword) {
+                            if (newPassword.length < 6) {
+                                showNotification('رمز عبور باید حداقل ۶ کاراکتر باشد.', 'error');
+                                return;
+                            }
                             currentUser.password = newPassword;
                             showNotification('رمز عبور با موفقیت تغییر کرد!', 'success');
                         }
@@ -2162,28 +2645,45 @@
             }, 2000);
         }
         
+        // تنظیم محتوای پیش‌فرض
+        function setupDefaultContent() {
+            // اضافه کردن متن‌های پیش‌فرض برای نمایش
+            const defaultContent = {
+                liveTitle: "گزارش زنده از نشست اضطراری مجلس درباره تحولات منطقه",
+                liveDescription: "پوشش زنده نشست اضطراری مجلس شورای اسلامی درباره تحولات منطقه‌ای و تصمیم‌گیری در مورد سیاست‌های خارجی کشور. نمایندگان به صورت زنده نظرات خود را ارائه می‌دهند."
+            };
+            
+            // اگر محتوای پخش زنده خالی است، از پیش‌فرض استفاده کن
+            if (!document.getElementById('liveTitle').textContent) {
+                document.getElementById('liveTitle').textContent = defaultContent.liveTitle;
+                document.getElementById('liveDescription').textContent = defaultContent.liveDescription;
+            }
+        }
+        
         // خروج از حساب کاربری
         function logout() {
-            currentUser = null;
-            isAdmin = false;
-            
-            // حذف از localStorage
-            localStorage.removeItem('newsSiteLoggedIn');
-            localStorage.removeItem('newsSiteUserData');
-            
-            // به‌روزرسانی UI
-            document.getElementById('loginBtn').style.display = 'inline-block';
-            document.getElementById('registerBtn').style.display = 'inline-block';
-            document.getElementById('userProfile').classList.add('d-none');
-            
-            // پنهان کردن پنل‌ها
-            document.getElementById('adminPanel').classList.remove('active');
-            document.getElementById('userPanel').classList.remove('active');
-            
-            // نمایش صفحه اصلی
-            showPage('home');
-            
-            showNotification('با موفقیت از حساب کاربری خارج شدید.', 'success');
+            if (confirm('آیا می‌خواهید از حساب کاربری خود خارج شوید؟')) {
+                currentUser = null;
+                isAdmin = false;
+                
+                // حذف از localStorage
+                localStorage.removeItem('newsSiteLoggedIn');
+                localStorage.removeItem('newsSiteUserData');
+                
+                // به‌روزرسانی UI
+                document.getElementById('loginBtn').style.display = 'inline-block';
+                document.getElementById('registerBtn').style.display = 'inline-block';
+                document.getElementById('userProfile').classList.add('d-none');
+                
+                // پنهان کردن پنل‌ها
+                document.getElementById('adminPanel').classList.remove('active');
+                document.getElementById('userPanel').classList.remove('active');
+                
+                // نمایش صفحه اصلی
+                showPage('home');
+                
+                showNotification('با موفقیت از حساب کاربری خارج شدید.', 'success');
+            }
         }
         
         // نمایش نوتیفیکیشن
@@ -2204,6 +2704,7 @@
                 z-index: 3000;
                 animation: fadeIn 0.3s ease, fadeOut 0.3s ease 2.7s;
                 font-weight: 600;
+                max-width: 400px;
             `;
             
             document.body.appendChild(notification);
