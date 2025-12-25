@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سایت خبری حرفه‌ای با Laravel - کد کامل</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(to right, #1e3c72, #2a5298);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .badges {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .content {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            min-height: 800px;
+        }
+        
+        .sidebar {
+            background: #f8f9fa;
+            padding: 30px;
+            border-right: 1px solid #e9ecef;
+        }
+        
+        .sidebar h3 {
+            color: #2a5298;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .file-list {
+            list-style: none;
+        }
+        
+        .file-list li {
+            margin-bottom: 10px;
+        }
+        
+        .file-list a {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            color: #495057;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .file-list a:hover {
+            background: #e9ecef;
+            color: #1e3c72;
+        }
+        
+        .file-list i {
+            margin-left: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .code-container {
+            padding: 30px;
+            background: #1e1e1e;
+            color: #d4d4d4;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            overflow-x: auto;
+            position: relative;
+        }
+        
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #444;
+        }
+        
+        .code-header h3 {
+            color: #fff;
+            font-size: 1.2rem;
+        }
+        
+        .copy-btn {
+            background: #007acc;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background: #005a9e;
+        }
+        
+        .code {
+            white-space: pre-wrap;
+            tab-size: 4;
+            line-height: 1.5;
+            font-size: 0.95rem;
+        }
+        
+        .keyword {
+            color: #569cd6;
+        }
+        
+        .string {
+            color: #ce9178;
+        }
+        
+        .comment {
+            color: #6a9955;
+        }
+        
+        .function {
+            color: #dcdcaa;
+        }
+        
+        .variable {
+            color: #9cdcfe;
+        }
+        
+        .tag {
+            color: #808080;
+        }
+        
+        .tabs {
+            display: flex;
+            background: #2d2d2d;
+            padding: 10px 10px 0 10px;
+            border-bottom: 1px solid #444;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            background: #2d2d2d;
+            color: #ccc;
+            border: 1px solid transparent;
+            border-bottom: none;
+            cursor: pointer;
+            border-radius: 8px 8px 0 0;
+            transition: all 0.3s;
+        }
+        
+        .tab.active {
+            background: #1e1e1e;
+            color: white;
+            border-color: #444;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .instructions {
+            background: #fff3cd;
+            border: 1px solid #ffecb5;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px;
+        }
+        
+        .instructions h3 {
+            color: #856404;
+            margin-bottom: 15px;
+        }
+        
+        .instructions ol {
+            margin-right: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 10px;
+        }
+        
+        .alert {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .footer {
+            background: #f8f9fa;
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                border-right: none;
+                border-bottom: 1px solid #e9ecef;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🗞️ سایت خبری حرفه‌ای با Laravel</h1>
+            <p>کد کامل پروژه با پنل مدیریت + SEO + پخش زنده</p>
+            <div class="badges">
+                <div class="badge">Laravel 10</div>
+                <div class="badge">Vue.js 3</div>
+                <div class="badge">Tailwind CSS</div>
+                <div class="badge">SEO کامل</div>
+                <div class="badge">پخش زنده</div>
+                <div class="badge">پنل مدیریت</div>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h3><i class="fas fa-info-circle"></i> راهنمای نصب و اجرا</h3>
+            <ol>
+                <li>ابتدا Composer و Node.js را نصب کنید</li>
+                <li>دستورات زیر را در ترمینال اجرا کنید:</li>
+                <li><code>composer create-project laravel/laravel news-site</code></li>
+                <li>فایل‌های زیر را در پروژه کپی کنید</li>
+                <li><code>php artisan migrate</code></li>
+                <li><code>php artisan serve</code> و <code>npm run dev</code></li>
+            </ol>
+        </div>
+        
+        <div class="content">
+            <div class="sidebar">
+                <h3><i class="fas fa-folder-open"></i> ساختار پروژه</h3>
+                <ul class="file-list">
+                    <li><a href="#" onclick="showTab('composer')"><i class="fas fa-file-code"></i> composer.json</a></li>
+                    <li><a href="#" onclick="showTab('env')"><i class="fas fa-cog"></i> .env.example</a></li>
+                    <li><a href="#" onclick="showTab('routes')"><i class="fas fa-route"></i> routes/web.php</a></li>
+                    <li><a href="#" onclick="showTab('userModel')"><i class="fas fa-database"></i> User Model</a></li>
+                    <li><a href="#" onclick="showTab('articleModel')"><i class="fas fa-newspaper"></i> Article Model</a></li>
+                    <li><a href="#" onclick="showTab('seoModel')"><i class="fas fa-search"></i> SEO Model</a></li>
+                    <li><a href="#" onclick="showTab('migration')"><i class="fas fa-table"></i> Migration ها</a></li>
+                    <li><a href="#" onclick="showTab('controller')"><i class="fas fa-code"></i> Article Controller</a></li>
+                    <li><a href="#" onclick="showTab('adminView')"><i class="fas fa-eye"></i> Admin Layout</a></li>
+                    <li><a href="#" onclick="showTab('seoConfig')"><i class="fas fa-chart-line"></i> SEO Config</a></li>
+                    <li><a href="#" onclick="showTab('readme')"><i class="fas fa-book"></i> README.md</a></li>
+                </ul>
+            </div>
+            
+            <div class="code-container">
+                <div class="tabs">
+                    <div class="tab active" onclick="showTab('composer')">composer.json</div>
+                    <div class="tab" onclick="showTab('env')">.env.example</div>
+                    <div class="tab" onclick="showTab('routes')">routes/web.php</div>
+                </div>
+                
+                <div class="tab-content active" id="composer">
+                    <div class="code-header">
+                        <h3><i class="fas fa-file-code"></i> composer.json</h3>
+                        <button class="copy-btn" onclick="copyCode('composer-code')">کپی کد</button>
+                    </div>
+                    <pre id="composer-code" class="code">{
+    <span class="string">"name"</span>: <span class="string">"laravel/laravel"</span>,
+    <span class="string">"type"</span>: <span class="string">"project"</span>,
+    <span class="string">"description"</span>: <span class="string">"سایت خبری حرفه‌ای با پنل مدیریت"</span>,
+    <span class="string">"keywords"</span>: [<span class="string">"news"</span>, <span class="string">"laravel"</span>, <span class="string">"vue"</span>, <span class="string">"admin"</span>],
+    <span class="string">"license"</span>: <span class="string">"MIT"</span>,
+    <span class="string">"require"</span>: {
+        <span class="string">"php"</span>: <span class="string">"^8.1"</span>,
+        <span class="string">"guzzlehttp/guzzle"</span>: <span class="string">"^7.2"</span>,
+        <span class="string">"laravel/framework"</span>: <span class="string">"^10.0"</span>,
+        <span class="string">"laravel/sanctum"</span>: <span class="string">"^3.2"</span>,
+        <span class="string">"laravel/tinker"</span>: <span class="string">"^2.8"</span>,
+        <span class="string">"artesaos/seotools"</span>: <span class="string">"^0.20.0"</span>,
+        <span class="string">"spatie/laravel-sitemap"</span>: <span class="string">"^7.0"</span>,
+        <span class="string">"intervention/image"</span>: <span class="string">"^2.7"</span>
+    },
+    <span class="string">"require-dev"</span>: {
+        <span class="string">"fakerphp/faker"</span>: <span class="string">"^1.9.1"</span>,
+        <span class="string">"laravel/breeze"</span>: <span class="string">"^1.20"</span>,
+        <span class="string">"laravel/pint"</span>: <span class="string">"^1.0"</span>,
+        <span class="string">"laravel/sail"</span>: <span class="string">"^1.18"</span>,
+        <span class="string">"mockery/mockery"</span>: <span class="string">"^1.4.4"</span>,
+        <span class="string">"nunomaduro/collision"</span>: <span class="string">"^7.0"</span>,
+        <span class="string">"phpunit/phpunit"</span>: <span class="string">"^10.0"</span>
+    },
+    <span class="string">"autoload"</span>: {
+        <span class="string">"psr-4"</span>: {
+            <span class="string">"App\\"</span>: <span class="string">"app/"</span>,
+            <span class="string">"Database\\Factories\\"</span>: <span class="string">"database/factories/"</span>,
+            <span class="string">"Database\\Seeders\\"</span>: <span class="string">"database/seeders/"</span>
+        }
+    },
+    <span class="string">"scripts"</span>: {
+        <span class="string">"post-autoload-dump"</span>: [
+            <span class="string">"Illuminate\\Foundation\\ComposerScripts::postAutoloadDump"</span>,
+            <span class="string">"@php artisan package:discover --ansi"</span>
+        ],
+        <span class="string">"post-root-package-install"</span>: [
+            <span class="string">"@php -r \"file_exists('.env') || copy('.env.example', '.env');\""</span>
+        ],
+        <span class="string">"post-create-project-cmd"</span>: [
+            <span class="string">"@php artisan key:generate --ansi"</span>
+        ]
+    },
+    <span class="string">"minimum-stability"</span>: <span class="string">"stable"</span>,
+    <span class="string">"prefer-stable"</span>: <span class="keyword">true</span>
+}</pre>
+                </div>
+                
+                <div class="tab-content" id="env">
+                    <div class="code-header">
+                        <h3><i class="fas fa-cog"></i> .env.example</h3>
+                        <button class="copy-btn" onclick="copyCode('env-code')">کپی کد</button>
+                    </div>
+                    <pre id="env-code" class="code"><span class="comment"># تنظیمات اصلی</span>
+APP_NAME=<span class="string">"سایت خبری"</span>
+APP_ENV=local
+APP_KEY=
+APP_DEBUG=<span class="keyword">true</span>
+APP_URL=http://<span class="string">127.0.0.1:8000</span>
+APP_TIMEZONE=Asia/Tehran
+
+<span class="comment"># پایگاه داده</span>
+DB_CONNECTION=mysql
+DB_HOST=<span class="string">127.0.0.1</span>
+DB_PORT=3306
+DB_DATABASE=news_site
+DB_USERNAME=root
+DB_PASSWORD=
+
+<span class="comment"># SEO و سرویس‌ها</span>
+META_TITLE=<span class="string">"سایت خبری | آخرین اخبار"</span>
+META_DESCRIPTION=<span class="string">"آخرین اخبار ایران و جهان"</span>
+META_KEYWORDS=<span class="string">"اخبار,خبر,اخبار ایران,اخبار جهان"</span>
+
+<span class="comment"># پخش زنده</span>
+LIVE_STREAM_URL=rtmp://localhost/live
+LIVE_STREAM_KEY=your_stream_key
+
+<span class="comment"># کش</span>
+REDIS_HOST=<span class="string">127.0.0.1</span>
+REDIS_PASSWORD=null
+REDIS_PORT=6379
+
+<span class="comment"># ایمیل</span>
+MAIL_MAILER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME=
+MAIL_PASSWORD=
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=
+MAIL_FROM_NAME=<span class="string">"${APP_NAME}"</span></pre>
+                </div>
+                
+                <div class="tab-content" id="routes">
+                    <div class="code-header">
+                        <h3><i class="fas fa-route"></i> routes/web.php</h3>
+                        <button class="copy-btn" onclick="copyCode('routes-code')">کپی کد</button>
+                    </div>
+                    <pre id="routes-code" class="code"><span class="tag">&lt;?php</span>
+
+<span class="keyword">use</span> Illuminate\Support\Facades\Route;
+<span class="keyword">use</span> App\Http\Controllers\Admin\DashboardController;
+<span class="keyword">use</span> App\Http\Controllers\Admin\ArticleController;
+<span class="keyword">use</span> App\Http\Controllers\Admin\CategoryController;
+<span class="keyword">use</span> App\Http\Controllers\Admin\SeoController;
+
+<span class="comment">// صفحات عمومی</span>
+Route::get(<span class="string">'/'</span>, <span class="keyword">function</span> () {
+    <span class="keyword">return</span> view(<span class="string">'welcome'</span>);
+});
+
+<span class="comment">// احراز هویت</span>
+Route::get(<span class="string">'/dashboard'</span>, <span class="keyword">function</span> () {
+    <span class="keyword">return</span> view(<span class="string">'dashboard'</span>);
+})->middleware([<span class="string">'auth'</span>, <span class="string">'verified'</span>])->name(<span class="string">'dashboard'</span>);
+
+<span class="comment">// مسیرهای ادمین</span>
+Route::middleware([<span class="string">'auth'</span>, <span class="string">'admin'</span>])->prefix(<span class="string">'admin'</span>)->name(<span class="string">'admin.'</span>)->group(<span class="keyword">function</span> () {
+    <span class="comment">// داشبورد</span>
+    Route::get(<span class="string">'/dashboard'</span>, [DashboardController::<span class="keyword">class</span>, <span class="string">'index'</span>])->name(<span class="string">'dashboard'</span>);
+    
+    <span class="comment">// مقالات</span>
+    Route::resource(<span class="string">'articles'</span>, ArticleController::<span class="keyword">class</span>);
+    Route::post(<span class="string">'articles/{article}/publish'</span>, [ArticleController::<span class="keyword">class</span>, <span class="string">'publish'</span>])->name(<span class="string">'articles.publish'</span>);
+    Route::post(<span class="string">'articles/{article}/feature'</span>, [ArticleController::<span class="keyword">class</span>, <span class="string">'feature'</span>])->name(<span class="string">'articles.feature'</span>);
+    
+    <span class="comment">// دسته‌بندی‌ها</span>
+    Route::resource(<span class="string">'categories'</span>, CategoryController::<span class="keyword">class</span>);
+    
+    <span class="comment">// SEO</span>
+    Route::get(<span class="string">'seo'</span>, [SeoController::<span class="keyword">class</span>, <span class="string">'index'</span>])->name(<span class="string">'seo.index'</span>);
+    Route::get(<span class="string">'seo/{seo}/edit'</span>, [SeoController::<span class="keyword">class</span>, <span class="string">'edit'</span>])->name(<span class="string">'seo.edit'</span>);
+    Route::put(<span class="string">'seo/{seo}'</span>, [SeoController::<span class="keyword">class</span>, <span class="string">'update'</span>])->name(<span class="string">'seo.update'</span>);
+    Route::post(<span class="string">'seo/generate'</span>, [SeoController::<span class="keyword">class</span>, <span class="string">'generate'</span>])->name(<span class="string">'seo.generate'</span>);
+});
+
+<span class="comment">// احراز هویت Laravel Breeze</span>
+require __DIR__.<span class="string">'/auth.php'</span>;</pre>
+                </div>
+                
+                <div class="tab-content" id="userModel">
+                    <div class="code-header">
+                        <h3><i class="fas fa-database"></i> app/Models/User.php</h3>
+                        <button class="copy-btn" onclick="copyCode('userModel-code')">کپی کد</button>
+                    </div>
+                    <pre id="userModel-code" class="code"><span class="tag">&lt;?php</span>
+
+<span class="keyword">namespace</span> App\Models;
+
+<span class="keyword">use</span> Illuminate\Database\Eloquent\Factories\HasFactory;
+<span class="keyword">use</span> Illuminate\Foundation\Auth\User <span class="keyword">as</span> Authenticatable;
+<span class="keyword">use</span> Illuminate\Notifications\Notifiable;
+<span class="keyword">use</span> Laravel\Sanctum\HasApiTokens;
+<span class="keyword">use</span> App\Traits\HasSeo;
+
+<span class="keyword">class</span> <span class="function">User</span> <span class="keyword">extends</span> Authenticatable
+{
+    <span class="keyword">use</span> HasApiTokens, HasFactory, Notifiable, HasSeo;
+
+    <span class="keyword">protected</span> <span class="variable">$fillable</span> = [
+        <span class="string">'name'</span>,
+        <span class="string">'email'</span>,
+        <span class="string">'password'</span>,
+        <span class="string">'role'</span>,
+        <span class="string">'avatar'</span>,
+        <span class="string">'phone'</span>,
+        <span class="string">'is_active'</span>,
+        <span class="string">'is_verified'</span>,
+        <span class="string">'bio'</span>,
+        <span class="string">'social_links'</span>,
+        <span class="string">'website'</span>
+    ];
+
+    <span class="keyword">protected</span> <span class="variable">$hidden</span> = [
+        <span class="string">'password'</span>,
+        <span class="string">'remember_token'</span>,
+    ];
+
+    <span class="keyword">protected</span> <span class="variable">$casts</span> = [
+        <span class="string">'email_verified_at'</span> => <span class="string">'datetime'</span>,
+        <span class="string">'social_links'</span> => <span class="string">'array'</span>,
+        <span class="string">'is_active'</span> => <span class="string">'boolean'</span>,
+        <span class="string">'is_verified'</span> => <span class="string">'boolean'</span>
+    ];
+
+    <span class="comment">// روابط</span>
+    <span class="keyword">public</span> <span class="keyword">function</span> <span class="function">articles</span>()
+    {
+        <span class="keyword">return</span> <span class="variable">$this</span>->hasMany(Article::<span class="keyword">class</span>, <span class="string">'author_id'</span>);
+    }
+
+    <span class="keyword">public</span> <span class="keyword">function</span> <span class="function">comments</span>()
+    {
+        <span class="keyword">return</span> <span class="variable">$this</span>->hasMany(Comment::<span class="keyword">class</span>);
+    }
+
+    <span class="comment">// متدهای کمکی</span>
+    <span class="keyword">public</span> <span class="keyword">function</span> <span class="function">isAdmin</span>()
+    {
+        <span class="keyword">return</span> <span class="variable">$this</span>->role === <span class="string">'admin'</span>;
+    }
+
+    <span class="keyword">public</span> <span class="keyword">function</span> <span class="function">isEditor</span>()
+    {
+        <span class="keyword">return</span> <span class="variable">$this</span>->role === <span class="string">'editor'</span>;
+    }
+
+    <span class="keyword">public</span> <span class="keyword">function</span> <span class="function">scopeActive</span>(<span class="variable">$query</span>)
+    {
+        <span class="keyword">return</span> <span class="variable">$query</span>->where(<span class="string">'is_active'</span>, <span class="keyword">true</span>);
+    }
+
+    <span class="keyword">public</span> <span class="keyword">function</span> <span class="function">scopeAdmins</span>(<span class="variable">$query</span>)
+    {
+        <span class="keyword">return</span> <span class="variable">$query</span>->where(<span class="string">'role'</span>, <span class="string">'admin'</span>);
+    }
+
+    <span class="keyword">public</span> <span class="keyword">function</span> <span class="function">scopeEditors</span>(<span class="variable">$query</span>)
+    {
+        <span class="keyword">return</span> <span class="variable">$query</span>->where(<span class="string">'role'</span>, <span class="string">'editor'</span>);
+    }
+}</pre>
+                </div>
+                
+                <div class="tab-content" id="articleModel">
+                    <div class="code-header">
+                        <h3><i class="fas fa-newspaper"></i> app/Models/Article.php</h3>
+                        <button class="copy-btn" onclick="copyCode('articleModel-code')">کپی کد</button>
+                    </div>
+                    <pre id="articleModel-code" class="code"><span class="tag">&lt;?php</span>
+
+<span class="keyword">namespace</span> App\Models;
+
+<span class="keyword">use</span> Illuminate\Database\Eloquent\Factories\HasFactory;
+<span class="keyword">use</span> Illuminate\Database\Eloquent\Model;
+<span class="keyword">use</span> Illuminate\Database\Eloquent\SoftDeletes;
+<span class="keyword">use</span> App\Traits\HasSeo;
+<span class="keyword">use</span> Illuminate\Support\Str;
+
+<span class="keyword">class</span> <span class="function">Article</span> <span class="keyword">extends</span> Model
+{
+    <span class="keyword">use</span> HasFactory, SoftDeletes, HasSeo;
+
+    <span class="keyword">protected</span> <span class="variable">$fillable</span> = [
+        <span class="string">'title'</span>,
+        <span class="string">'slug'</span>,
+        <span class="string">'summary'</span>,
+        <span class="string">'content'</span>,
+        <span class="string">'featured_image'</span>,
+        <span class="string">'gallery'</span>,
+        <span class="string">'video_url'</span>,
+        <span class="string">'video_type'</span>,
+        <span class="string">'is_live'</span>,
+        <span class="string">'live_stream_url'</span>,
+        <span class="string">'live_stream_key'</span>,
+        <span class="string">'is_featured'</span>,
+        <span class="string">'is_breaking'</span>,
+        <span class="string">'status'</span>,
+        <span class="string">'views'</span>,
+        <span class="string">'likes'</span>,
+        <span class="string">'shares'</span>,
+        <span class="string">'reading_time'</span>,
+        <span class="string">'published_at'</span>,
+        <span class="string">'meta_tags'</span>,
+        <span class="string">'author_id'</span>,
+        <span class="string">'category_id'</span>
+    ];
+
+    <span class="keyword">protected</span> <span class="variable">$casts</span> = [
+        <span class="string">'gallery'</span> => <span class="string">'array'</span>,
+        <span class="string">'meta_tags'</span> => <span class="string">'array'</span>,
+        <span class="string">'is_live'</span> => <span class="string">'boolean'</span>,
+        <span class="string">'is_featured'</span> => <span class="string">'boolean'</span>,
+        <span class="string">'is_breaking'</span> => <span class="string">'boolean'</span>,
+        <span class="string">'published_at'</span> => <span class="string">'datetime'</span>,
+        <span class="string">'views'</span> => <span class="string">'integer'</span>,
+        <span class="string">'likes'</span> => <span class="string">'integer'</span>,
+        <span class="string">'shares'</span> => <span class="string">'integer'</span>,
+        <span class="string">'reading_time'</span> => <span class="string">'integer'</span>
+    ];
+
+    <span class="comment">// روابط</span>
+    <span class="keyword">public</span> <span class="keyword">function</span> <span class="function">author</span>()
+    {
+        <span class="keyword">return</span> <span class="variable">$this</span>->belongsTo(User::<span class="keyword">class</span>, <span class="string">'author_id'</span>);
+    }
+
+    <span class="keyword">public</span> <span class="keyword">function</span> <span class="function">category</span>()
+    {
+        <span class="keyword">return</span> <span class="variable">$this</span>->belongsTo(Category::<span class="keyword">class</span>);
+    }
+
+    <span class="keyword">public</span> <span class="keyword">function</span> <span class="function">tags</span>()
+    {
+        <span class="keyword">return</span> <span class="variable">$this</span>->belongsToMany(Tag::<span class="keyword">class</span>, <span class="string">'article_tag'</span>);
+    }
+
+    <span class="keyword">public</span> <span class="keyword">function</span> <span class="function">comments</span>()
+    {
+        <span class="keyword">return</span> <span class="variable">$this</span>->hasMany(Comment::<span class="keyword">class</span>)->whereNull(<span class="string">'parent_id'</span>);
+    }
+
+    <span class="comment">// SEO Override</span>
+    <span class="keyword">public</span> <span class="keyword">function</span> <span class="function">seoTitle</span>()
+    {
+        <span class="keyword">return</span> <span class="variable">$this</span>->title . <span class="string">' | '</span> . config(<span class="string">'app.name'</span>);
+    }
+
+    <span class="keyword">public</span> <span class="keyword">function</span> <span class="function">seoDescription</span>()
+    {
+        <span class="keyword">return</span> <span class="variable">$this</span>->summary ?? Str::limit(strip_tags(<span class="variable">$this</span>->content), <span class="number">160</span>);
+    }
+
+    <span class="keyword">public</span> <span class="keyword">function</span> <span class="function">seoKeywords</span>()
+    {
+        <span class="variable">$keywords</span> = [<span class="string">'اخبار'</span>, <span class="string">'خبر'</span>, <span class="string">'مقاله'</span>, <span class="string">'نوشته'</span>];
+        
+        <span class="keyword">if</span> (<span class="variable">$this</span>->tags->isNotEmpty()) {
+            <span class="variable">$keywords</span> = array_merge(<span class="variable">$keywords</span>, <span class="variable">$this</span>->tags->pluck(<span class="string">'name'</span>)->toArray());
+        }
+        
+        <span class="keyword">if</span> (<span class="variable">$this</span>->category) {
+            <span class="variable">$keywords</span>[] = <span class="variable">$this</span>->category->name;
+        }
+        
+        <span class="keyword">return</span> array_unique(<span class="variable">$keywords</span>);
+    }
+
+    <span class="comment">// Scope ها</span>
+    <span class="keyword">public</span> <span class="keyword">function</span> <span class="function">scopePublished</span>(<span class="variable">$query</span>)
+    {
+        <span class="keyword">return</span> <span class="variable">$query</span>->where(<span class="string">'status'</span>, <span class="string">'published'</span>)
+            ->whereNotNull(<span class="string">'published_at'</span>)
+            ->where(<span class="string">'published_at'</span>, <span class="string">'&lt;='</span>, now());
+    }
+
+    <span class="keyword">public</span> <span class="keyword">function</span> <span class="function">scopeFeatured</span>(<span class="variable">$query</span>)
+    {
+        <span class="keyword">return</span> <span class="variable">$query</span>->where(<span class="string">'is_featured'</span>, <span class="keyword">true</span>);
+    }
+
+    <span class="keyword">public</span> <span class="keyword">function</span> <span class="function">scopeBreaking</span>(<span class="variable">$query</span>)
+    {
+        <span class="keyword">return</span> <span class="variable">$query</span>->where(<span class="string">'is_breaking'</span>, <span class="keyword">true</span>);
+    }
+
+    <span class="keyword">public</span> <span class="keyword">function</span> <span class="function">scopeLive</span>(<span class="variable">$query</span>)
+    {
+        <span class="keyword">return</span> <span class="variable">$query</span>->where(<span class="string">'is_live'</span>, <span class="keyword">true</span>);
+    }
+
+    <span class="comment">// متدهای کمکی</span>
+    <span class="keyword">public</span> <span class="keyword">function</span> <span class="function">incrementViews</span>()
+    {
+        <span class="variable">$this</span>->increment(<span class="string">'views'</span>);
+    }
+
+    <span class="keyword">public</span> <span class="keyword">function</span> <span class="function">getReadingTime</span>()
+    {
+        <span class="keyword">if</span> (<span class="variable">$this</span>->reading_time) {
+            <span class="keyword">return</span> <span class="variable">$this</span>->reading_time;
+        }
+
+        <span class="variable">$wordCount</span> = str_word_count(strip_tags(<span class="variable">$this</span>->content));
+        <span class="variable">$this</span>->reading_time = ceil(<span class="variable">$wordCount</span> / <span class="number">200</span>);
+        <span class="variable">$this</span>->save();
+
+        <span class="keyword">return</span> <span class="variable">$this</span>->reading_time;
+    }
+
+    <span class="comment">// Event ها</span>
+    <span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">function</span> <span class="function">boot</span>()
+    {
+        <span class="keyword">parent</span>::boot();
+
+        <span class="keyword">static</span>::creating(<span class="keyword">function</span> (<span class="variable">$article</span>) {
+            <span class="keyword">if</span> (empty(<span class="variable">$article</span>->slug)) {
+                <span class="variable">$article</span>->slug = Str::slug(<span class="variable">$article</span>->title) . <span class="string">'-'</span> . Str::random(<span class="number">6</span>);
+            }
+            
+            <span class="keyword">if</span> (empty(<span class="variable">$article</span>->reading_time)) {
+                <span class="variable">$wordCount</span> = str_word_count(strip_tags(<span class="variable">$article</span>->content));
+                <span class="variable">$article</span>->reading_time = ceil(<span class="variable">$wordCount</span> / <span class="number">200</span>);
+            }
+        });
+
+        <span class="keyword">static</span>::created(<span class="keyword">function</span> (<span class="variable">$article</span>) {
+            <span class="comment">// ایجاد SEO داده به صورت خودکار</span>
+            <span class="keyword">if</span> (!<span class="variable">$article</span>->seo()->exists()) {
+                <span class="variable">$article</span>->createSeoData();
+            }
+        });
+    }
+}</pre>
+                </div>
+                
+                <div class="tab-content" id="seoModel">
+                    <div class="code-header">
+                        <h3><i class="fas fa-search"></i> app/Models/SeoData.php</h3>
+                        <button class="copy-btn" onclick="copyCode('seoModel-code')">کپی کد</button>
+                    </div>
+                    <pre id="seoModel-code" class="code"><span class="tag">&lt;?php</span>
+
+<span class="keyword">namespace</span> App\Models;
+
+<span class="keyword">use</span> Illuminate\Database\Eloquent\Factories\HasFactory;
+<span class="keyword">use</span> Illuminate\Database\Eloquent\Model;
+
+<span class="keyword">class</span> <span class="function">SeoData</span> <span class="keyword">extends</span> Model
+{
+    <span class="keyword">use</span> HasFactory;
+
+    <span class="keyword">protected</span> <span class="variable">$fillable</span> = [
+        <span class="string">'meta_title'</span>,
+        <span class="string">'meta_description'</span>,
+        <span class="string">'meta_keywords'</span>,
+        <span class="string">'og_title'</span>,
+        <span class="string">'og_description'</span>,
+        <span class="string">'og_image'</span>,
+        <span class="string">'twitter_title'</span>,
+        <span class="string">'twitter_description'</span>,
+        <span class="string">'twitter_image'</span>,
+        <span class="string">'canonical_url'</span>,
+        <span class="string">'structured_data'</span>,
+        <span class="string">'priority'</span>,
+        <span class="string">'change_frequency'</span>,
+        <span class="string">'noindex'</span>,
+        <span class="string">'nofollow'</span>,
+        <span class="string">'robots'</span>
+    ];
+
+    <span class="keyword">protected</span> <span class="variable">$casts</span> = [
+        <span class="string">'meta_keywords'</span> => <span class="string">'array'</span>,
+        <span class="string">'structured_data'</span> => <span class="string">'array'</span>,
+        <span class="string">'noindex'</span> => <span class="string">'boolean'</span>,
+        <span class="string">'nofollow'</span> => <span class="string">'boolean'</span>,
+        <span class="string">'priority'</span> => <span class="string">'float'</span>
+    ];
+
+    <span class="keyword">public</span> <span class="keyword">function</span> <span class="function">seoable</span>()
+    {
+        <span class="keyword">return</span> <span class="variable">$this</span>->morphTo();
+    }
+
+    <span class="comment">// Accessor ها</span>
+    <span class="keyword">public</span> <span class="keyword">function</span> <span class="function">getRobotsAttribute</span>(<span class="variable">$value</span>)
+    {
+        <span class="keyword">if</span> (<span class="variable">$value</span>) {
+            <span class="keyword">return</span> <span class="variable">$value</span>;
+        }
+
+        <span class="variable">$robots</span> = [];
+        
+        <span class="keyword">if</span> (<span class="variable">$this</span>->noindex) {
+            <span class="variable">$robots</span>[] = <span class="string">'noindex'</span>;
+        } <span class="keyword">else</span> {
+            <span class="variable">$robots</span>[] = <span class="string">'index'</span>;
+        }
+        
+        <span class="keyword">if</span> (<span class="variable">$this</span>->nofollow) {
+            <span class="variable">$robots</span>[] = <span class="string">'nofollow'</span>;
+        } <span class="keyword">else</span> {
+            <span class="variable">$robots</span>[] = <span class="string">'follow'</span>;
+        }
+        
+        <span class="keyword">return</span> implode(<span class="string">', '</span>, <span class="variable">$robots</span>);
+    }
+
+    <span class="comment">// متدهای کمکی</span>
+    <span class="keyword">public</span> <span class="keyword">function</span> <span class="function">getTitleLength</span>()
+    {
+        <span class="keyword">return</span> strlen(<span class="variable">$this</span>->meta_title ?? <span class="string">''</span>);
+    }
+
+    <span class="keyword">public</span> <span class="keyword">function</span> <span class="function">getDescriptionLength</span>()
+    {
+        <span class="keyword">return</span> strlen(<span class="variable">$this</span>->meta_description ?? <span class="string">''</span>);
+    }
+
+    <span class="keyword">public</span> <span class="keyword">function</span> <span class="function">isTitleOptimal</span>()
+    {
+        <span class="variable">$length</span> = <span class="variable">$this</span>->getTitleLength();
+        <span class="keyword">return</span> <span class="variable">$length</span> >= <span class="number">30</span> && <span class="variable">$length</span> <= <span class="number">60</span>;
+    }
+
+    <span class="keyword">public</span> <span class="keyword">function</span> <span class="function">isDescriptionOptimal</span>()
+    {
+        <span class="variable">$length</span> = <span class="variable">$this</span>->getDescriptionLength();
+        <span class="keyword">return</span> <span class="variable">$length</span> >= <span class="number">70</span> && <span class="variable">$length</span> <= <span class="number">160</span>;
+    }
+
+    <span class="keyword">public</span> <span class="keyword">function</span> <span class="function">getSeoScore</span>()
+    {
+        <span class="variable">$score</span> = <span class="number">0</span>;
+        
+        <span class="keyword">if</span> (<span class="variable">$this</span>->isTitleOptimal()) <span class="variable">$score</span> += <span class="number">30</span>;
+        <span class="keyword">if</span> (<span class="variable">$this</span>->isDescriptionOptimal()) <span class="variable">$score</span> += <span class="number">30</span>;
+        <span class="keyword">if</span> (<span class="variable">$this</span>->meta_keywords && count(<span class="variable">$this</span>->meta_keywords) > <span class="number">0</span>) <span class="variable">$score</span> += <span class="number">20</span>;
+        <span class="keyword">if</span> (<span class="variable">$this</span>->og_image) <span class="variable">$score</span> += <span class="number">20</span>;
+        
+        <span class="keyword">return</span> <span class="variable">$score</span>;
+    }
+}</pre>
+                </div>
+                
+                <div class="tab-content" id="migration">
+                    <div class="code-header">
+                        <h3><i class="fas fa-table"></i> Migration ایجاد مقالات</h3>
+                        <button class="copy-btn" onclick="copyCode('migration-code')">کپی کد</button>
+                    </div>
+                    <pre id="migration-code" class="code"><span class="tag">&lt;?php</span>
+
+<span class="keyword">use</span> Illuminate\Database\Migrations\Migration;
+<span class="keyword">use</span> Illuminate\Database\Schema\Blueprint;
+<span class="keyword">use</span> Illuminate\Support\Facades\Schema;
+
+<span class="keyword">return new class extends</span> Migration
+{
+    <span class="keyword">public</span> <span class="keyword">function</span> <span class="function">up</span>(): <span class="keyword">void</span>
+    {
+        Schema::create(<span class="string">'articles'</span>, <span class="keyword">function</span> (Blueprint <span class="variable">$table</span>) {
+            <span class="variable">$table</span>->id();
+            <span class="variable">$table</span>->string(<span class="string">'title'</span>);
+            <span class="variable">$table</span>->string(<span class="string">'slug'</span>)->unique();
+            <span class="variable">$table</span>->text(<span class="string">'summary'</span>);
+            <span class="variable">$table</span>->longText(<span class="string">'content'</span>);
+            <span class="variable">$table</span>->string(<span class="string">'featured_image'</span>);
+            <span class="variable">$table</span>->json(<span class="string">'gallery'</span>)->nullable();
+            <span class="variable">$table</span>->string(<span class="string">'video_url'</span>)->nullable();
+            <span class="variable">$table</span>->string(<span class="string">'video_type'</span>)->nullable();
+            <span class="variable">$table</span>->boolean(<span class="string">'is_live'</span>)->default(<span class="keyword">false</span>);
+            <span class="variable">$table</span>->string(<span class="string">'live_stream_url'</span>)->nullable();
+            <span class="variable">$table</span>->string(<span class="string">'live_stream_key'</span>)->nullable();
+            <span class="variable">$table</span>->boolean(<span class="string">'is_featured'</span>)->default(<span class="keyword">false</span>);
+            <span class="variable">$table</span>->boolean(<span class="string">'is_breaking'</span>)->default(<span class="keyword">false</span>);
+            <span class="variable">$table</span>->enum(<span class="string">'status'</span>, [<span class="string">'draft'</span>, <span class="string">'pending'</span>, <span class="string">'published'</span>, <span class="string">'archived'</span>])->default(<span class="string">'draft'</span>);
+            <span class="variable">$table</span>->integer(<span class="string">'views'</span>)->default(<span class="number">0</span>);
+            <span class="variable">$table</span>->integer(<span class="string">'likes'</span>)->default(<span class="number">0</span>);
+            <span class="variable">$table</span>->integer(<span class="string">'shares'</span>)->default(<span class="number">0</span>);
+            <span class="variable">$table</span>->integer(<span class="string">'reading_time'</span>)->nullable();
+            <span class="variable">$table</span>->timestamp(<span class="string">'published_at'</span>)->nullable();
+            <span class="variable">$table</span>->json(<span class="string">'meta_tags'</span>)->nullable();
+            <span class="variable">$table</span>->foreignId(<span class="string">'author_id'</span>)->constrained(<span class="string">'users'</span>)->onDelete(<span class="string">'cascade'</span>);
+            <span class="variable">$table</span>->foreignId(<span class="string">'category_id'</span>)->constrained(<span class="string">'categories'</span>)->onDelete(<span class="string">'cascade'</span>);
+            <span class="variable">$table</span>->softDeletes();
+            <span class="variable">$table</span>->timestamps();
+            
+            <span class="comment">// Index ها برای جستجوی سریع</span>
+            <span class="variable">$table</span>->index([<span class="string">'status'</span>, <span class="string">'published_at'</span>]);
+            <span class="variable">$table</span>->index(<span class="string">'is_featured'</span>);
+            <span class="variable">$table</span>->index(<span class="string">'is_breaking'</span>);
+            <span class="variable">$table</span>->fullText([<span class="string">'title'</span>, <span class="string">'summary'</span>, <span class="string">'content'</span>]);
+        });
+    }
+
+    <span class="keyword">public</span> <span class="keyword">function</span> <span class="function">down</span>(): <span class="keyword">void</span>
+    {
+        Schema::dropIfExists(<span class="string">'articles'</span>);
+    }
+};</pre>
+                </div>
+                
+                <div class="tab-content" id="controller">
+                    <div class="code-header">
+                        <h3><i class="fas fa-code"></i> Article Controller</h3>
+                        <button class="copy-btn" onclick="copyCode('controller-code')">کپی کد</button>
+                    </div>
+                    <pre id="controller-code" class="code"><span class="tag">&lt;?php</span>
+
+<span class="keyword">namespace</span> App\Http\Controllers\Admin;
+
+<span class="keyword">use</span> App\Http\Controllers\Controller;
+<span class="keyword">use</span> App\Models\Article;
+<span class="keyword">use</span> App\Models\Category;
+<span class="keyword">use</span> App\Models\Tag;
+<span class="keyword">use</span> Illuminate\Http\Request;
+<span class="keyword">use</span> Illuminate\Support\Facades\Storage;
+<span class="keyword">use</span> Illuminate\Support\Str;
+
+<span class="keyword">class</span> <span class="function">ArticleController</span> <span class="keyword">extends</span> Controller
+{
+    <span class="keyword">public</span> <span class="keyword">function</span> <span class="function">index</span>(Request <span class="variable">$request</span>)
+    {
+        <span class="variable">$query</span> = Article::with([<span class="string">'author'</span>, <span class="string">'category'</span>]);
+        
+        <span class="keyword">if</span> (<span class="variable">$request</span>->has(<span class="string">'search'</span>)) {
+            <span class="variable">$query</span>->where(<span class="string">'title'</span>, <span class="string">'like'</span>, <span class="string">"%{$request->search}%"</span>);
+        }
+        
+        <span class="keyword">if</span> (<span class="variable">$request</span>->has(<span class="string">'status'</span>) && <span class="variable">$request</span>->status !== <span class="string">'all'</span>) {
+            <span class="variable">$query</span>->where(<span class="string">'status'</span>, <span class="variable">$request</span>->status);
+        }
+        
+        <span class="variable">$articles</span> = <span class="variable">$query</span>->latest()->paginate(<span class="number">15</span>);
+        <span class="variable">$categories</span> = Category::all();
+        
+        <span class="keyword">return</span> view(<span class="string">'admin.articles.index'</span>, compact(<span class="string">'articles'</span>, <span class="string">'categories'</span>));
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">function</span> <span class="function">create</span>()
+    {
+        <span class="variable">$categories</span> = Category::all();
+        <span class="variable">$tags</span> = Tag::all();
+        
+        <span class="keyword">return</span> view(<span class="string">'admin.articles.create'</span>, compact(<span class="string">'categories'</span>, <span class="string">'tags'</span>));
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">function</span> <span class="function">store</span>(Request <span class="variable">$request</span>)
+    {
+        <span class="variable">$request</span>->validate([
+            <span class="string">'title'</span> => <span class="string">'required|string|max:255'</span>,
+            <span class="string">'summary'</span> => <span class="string">'required|string'</span>,
+            <span class="string">'content'</span> => <span class="string">'required|string'</span>,
+            <span class="string">'category_id'</span> => <span class="string">'required|exists:categories,id'</span>,
+            <span class="string">'featured_image'</span> => <span class="string">'required|image'</span>,
+            <span class="string">'status'</span> => <span class="string">'required|in:draft,pending,published'</span>,
+        ]);
+        
+        <span class="variable">$data</span> = <span class="variable">$request</span>->all();
+        
+        <span class="comment">// آپلود تصویر</span>
+        <span class="keyword">if</span> (<span class="variable">$request</span>->hasFile(<span class="string">'featured_image'</span>)) {
+            <span class="variable">$path</span> = <span class="variable">$request</span>->file(<span class="string">'featured_image'</span>)->store(<span class="string">'articles/featured'</span>, <span class="string">'public'</span>);
+            <span class="variable">$data</span>[<span class="string">'featured_image'</span>] = Storage::url(<span class="variable">$path</span>);
+        }
+        
+        <span class="comment">// ایجاد slug</span>
+        <span class="variable">$slug</span> = Str::slug(<span class="variable">$data</span>[<span class="string">'title'</span>]);
+        <span class="variable">$counter</span> = <span class="number">1</span>;
+        <span class="keyword">while</span> (Article::where(<span class="string">'slug'</span>, <span class="variable">$slug</span>)->exists()) {
+            <span class="variable">$slug</span> = Str::slug(<span class="variable">$data</span>[<span class="string">'title'</span>]) . <span class="string">'-'</span> . <span class="variable">$counter</span>;
+            <span class="variable">$counter</span>++;
+        }
+        
+        <span class="variable">$data</span>[<span class="string">'slug'</span>] = <span class="variable">$slug</span>;
+        <span class="variable">$data</span>[<span class="string">'author_id'</span>] = auth()->id();
+        
+        <span class="keyword">if</span> (<span class="variable">$data</span>[<span class="string">'status'</span>] === <span class="string">'published'</span> && empty(<span class="variable">$data</span>[<span class="string">'published_at'</span>])) {
+            <span class="variable">$data</span>[<span class="string">'published_at'</span>] = now();
+        }
+        
+        <span class="variable">$article</span> = Article::create(<span class="variable">$data</span>);
+        
+        <span class="comment">// اضافه کردن تگ‌ها</span>
+        <span class="keyword">if</span> (<span class="variable">$request</span>->has(<span class="string">'tags'</span>)) {
+            <span class="variable">$article</span>->tags()->sync(<span class="variable">$request</span>->tags);
+        }
+        
+        <span class="keyword">return</span> redirect()->route(<span class="string">'admin.articles.index'</span>)
+            ->with(<span class="string">'success'</span>, <span class="string">'مقاله با موفقیت ایجاد شد.'</span>);
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">function</span> <span class="function">edit</span>(Article <span class="variable">$article</span>)
+    {
+        <span class="variable">$categories</span> = Category::all();
+        <span class="variable">$tags</span> = Tag::all();
+        
+        <span class="keyword">return</span> view(<span class="string">'admin.articles.edit'</span>, compact(<span class="string">'article'</span>, <span class="string">'categories'</span>, <span class="string">'tags'</span>));
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">function</span> <span class="function">update</span>(Request <span class="variable">$request</span>, Article <span class="variable">$article</span>)
+    {
+        <span class="variable">$request</span>->validate([
+            <span class="string">'title'</span> => <span class="string">'required|string|max:255'</span>,
+            <span class="string">'summary'</span> => <span class="string">'required|string'</span>,
+            <span class="string">'content'</span> => <span class="string">'required|string'</span>,
+            <span class="string">'category_id'</span> => <span class="string">'required|exists:categories,id'</span>,
+            <span class="string">'featured_image'</span> => <span class="string">'nullable|image'</span>,
+            <span class="string">'status'</span> => <span class="string">'required|in:draft,pending,published'</span>,
+        ]);
+        
+        <span class="variable">$data</span> = <span class="variable">$request</span>->all();
+        
+        <span class="comment">// آپلود تصویر جدید</span>
+        <span class="keyword">if</span> (<span class="variable">$request</span>->hasFile(<span class="string">'featured_image'</span>)) {
+            <span class="comment">// حذف تصویر قدیمی</span>
+            <span class="keyword">if</span> (<span class="variable">$article</span>->featured_image) {
+                Storage::delete(str_replace(<span class="string">'/storage/'</span>, <span class="string">'public/'</span>, <span class="variable">$article</span>->featured_image));
+            }
+            
+            <span class="variable">$path</span> = <span class="variable">$request</span>->file(<span class="string">'featured_image'</span>)->store(<span class="string">'articles/featured'</span>, <span class="string">'public'</span>);
+            <span class="variable">$data</span>[<span class="string">'featured_image'</span>] = Storage::url(<span class="variable">$path</span>);
+        }
+        
+        <span class="keyword">if</span> (<span class="variable">$data</span>[<span class="string">'status'</span>] === <span class="string">'published'</span> && empty(<span class="variable">$data</span>[<span class="string">'published_at'</span>]) && <span class="variable">$article</span>->status !== <span class="string">'published'</span>) {
+            <span class="variable">$data</span>[<span class="string">'published_at'</span>] = now();
+        }
+        
+        <span class="variable">$article</span>->update(<span class="variable">$data</span>);
+        
+        <span class="comment">// بروزرسانی تگ‌ها</span>
+        <span class="keyword">if</span> (<span class="variable">$request</span>->has(<span class="string">'tags'</span>)) {
+            <span class="variable">$article</span>->tags()->sync(<span class="variable">$request</span>->tags);
+        } <span class="keyword">else</span> {
+            <span class="variable">$article</span>->tags()->detach();
+        }
+        
+        <span class="keyword">return</span> redirect()->route(<span class="string">'admin.articles.index'</span>)
+            ->with(<span class="string">'success'</span>, <span class="string">'مقاله با موفقیت بروزرسانی شد.'</span>);
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">function</span> <span class="function">destroy</span>(Article <span class="variable">$article</span>)
+    {
+        <span class="comment">// حذف تصویر</span>
+        <span class="keyword">if</span> (<span class="variable">$article</span>->featured_image) {
+            Storage::delete(str_replace(<span class="string">'/storage/'</span>, <span class="string">'public/'</span>, <span class="variable">$article</span>->featured_image));
+        }
+        
+        <span class="variable">$article</span>->delete();
+        
+        <span class="keyword">return</span> redirect()->route(<span class="string">'admin.articles.index'</span>)
+            ->with(<span class="string">'success'</span>, <span class="string">'مقاله با موفقیت حذف شد.'</span>);
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">function</span> <span class="function">publish</span>(Article <span class="variable">$article</span>)
+    {
+        <span class="variable">$article</span>->update([
+            <span class="string">'status'</span> => <span class="string">'published'</span>,
+            <span class="string">'published_at'</span> => now(),
+        ]);
+        
+        <span class="keyword">return</span> response()->json([
+            <span class="string">'success'</span> => <span class="keyword">true</span>,
+            <span class="string">'message'</span> => <span class="string">'مقاله منتشر شد.'</span>,
+        ]);
+    }
+    
+    <span class="keyword">public</span> <span class="keyword">function</span> <span class="function">feature</span>(Article <span class="variable">$article</span>)
+    {
+        <span class="variable">$article</span>->update([<span class="string">'is_featured'</span> => <span class="keyword">true</span>]);
+        
+        <span class="keyword">return</span> response()->json([
+            <span class="string">'success'</span> => <span class="keyword">true</span>,
+            <span class="string">'message'</span> => <span class="string">'مقاله ویژه شد.'</span>,
+        ]);
+    }
+}</pre>
+                </div>
+                
+                <div class="tab-content" id="adminView">
+                    <div class="code-header">
+                        <h3><i class="fas fa-eye"></i> Admin Layout</h3>
+                        <button class="copy-btn" onclick="copyCode('adminView-code')">کپی کد</button>
+                    </div>
+                    <pre id="adminView-code" class="code"><span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="keyword">lang</span>=<span class="string">"fa"</span> <span class="keyword">dir</span>=<span class="string">"rtl"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="keyword">charset</span>=<span class="string">"UTF-8"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="keyword">name</span>=<span class="string">"viewport"</span> <span class="keyword">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;title&gt;</span>پنل مدیریت<span class="tag">&lt;/title&gt;</span>
+    
+    <span class="comment">&lt;!-- Tailwind CSS --&gt;</span>
+    <span class="tag">&lt;script </span><span class="keyword">src</span>=<span class="string">"https://cdn.tailwindcss.com"</span><span class="tag">&gt;&lt;/script&gt;</span>
+    
+    <span class="comment">&lt;!-- Font Awesome --&gt;</span>
+    <span class="tag">&lt;link</span> <span class="keyword">rel</span>=<span class="string">"stylesheet"</span> <span class="keyword">href</span>=<span class="string">"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"</span><span class="tag">&gt;</span>
+    
+    <span class="tag">&lt;style&gt;</span>
+        body { font-family: <span class="string">'Segoe UI'</span>, Tahoma, Geneva, Verdana, sans-serif; }
+    <span class="tag">&lt;/style&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body</span> <span class="keyword">class</span>=<span class="string">"bg-gray-100"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;nav</span> <span class="keyword">class</span>=<span class="string">"bg-blue-600 text-white p-4 shadow-lg"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;div</span> <span class="keyword">class</span>=<span class="string">"container mx-auto flex justify-between items-center"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;div</span> <span class="keyword">class</span>=<span class="string">"flex items-center space-x-4 space-x-reverse"</span><span class="tag">&gt;</span>
+                <span class="tag">&lt;i</span> <span class="keyword">class</span>=<span class="string">"fas fa-newspaper text-2xl"</span><span class="tag">&gt;&lt;/i&gt;</span>
+                <span class="tag">&lt;h1</span> <span class="keyword">class</span>=<span class="string">"text-xl font-bold"</span><span class="tag">&gt;</span>پنل مدیریت سایت خبری<span class="tag">&lt;/h1&gt;</span>
+            <span class="tag">&lt;/div&gt;</span>
+            <span class="tag">&lt;div</span> <span class="keyword">class</span>=<span class="string">"flex items-center space-x-4 space-x-reverse"</span><span class="tag">&gt;</span>
+                <span class="tag">&lt;span&gt;</span>{{ auth()->user()->name }}<span class="tag">&lt;/span&gt;</span>
+                <span class="tag">&lt;form</span> <span class="keyword">action</span>=<span class="string">"{{ route('logout') }}"</span> <span class="keyword">method</span>=<span class="string">"POST"</span><span class="tag">&gt;</span>
+                    @csrf
+                    <span class="tag">&lt;button</span> <span class="keyword">type</span>=<span class="string">"submit"</span> <span class="keyword">class</span>=<span class="string">"bg-red-500 hover:bg-red-600 px-4 py-2 rounded"</span><span class="tag">&gt;</span>
+                        <span class="tag">&lt;i</span> <span class="keyword">class</span>=<span class="string">"fas fa-sign-out-alt"</span><span class="tag">&gt;&lt;/i&gt;</span> خروج
+                    <span class="tag">&lt;/button&gt;</span>
+                <span class="tag">&lt;/form&gt;</span>
+            <span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;/nav&gt;</span>
+
+    <span class="tag">&lt;div</span> <span class="keyword">class</span>=<span class="string">"flex h-screen"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;aside</span> <span class="keyword">class</span>=<span class="string">"w-64 bg-gray-800 text-white"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;nav</span> <span class="keyword">class</span>=<span class="string">"p-4"</span><span class="tag">&gt;</span>
+                <span class="tag">&lt;ul</span> <span class="keyword">class</span>=<span class="string">"space-y-2"</span><span class="tag">&gt;</span>
+                    <span class="tag">&lt;li&gt;</span>
+                        <span class="tag">&lt;a</span> <span class="keyword">href</span>=<span class="string">"{{ route('admin.dashboard') }}"</span> 
+                           <span class="keyword">class</span>=<span class="string">"flex items-center p-3 hover:bg-gray-700 rounded {{ request()->routeIs('admin.dashboard') ? 'bg-gray-700' : '' }}"</span><span class="tag">&gt;</span>
+                            <span class="tag">&lt;i</span> <span class="keyword">class</span>=<span class="string">"fas fa-tachometer-alt ml-3"</span><span class="tag">&gt;&lt;/i&gt;</span>
+                            داشبورد
+                        <span class="tag">&lt;/a&gt;</span>
+                    <span class="tag">&lt;/li&gt;</span>
+                    <span class="tag">&lt;li&gt;</span>
+                        <span class="tag">&lt;a</span> <span class="keyword">href</span>=<span class="string">"{{ route('admin.articles.index') }}"</span> 
+                           <span class="keyword">class</span>=<span class="string">"flex items-center p-3 hover:bg-gray-700 rounded {{ request()->routeIs('admin.articles.*') ? 'bg-gray-700' : '' }}"</span><span class="tag">&gt;</span>
+                            <span class="tag">&lt;i</span> <span class="keyword">class</span>=<span class="string">"fas fa-newspaper ml-3"</span><span class="tag">&gt;&lt;/i&gt;</span>
+                            مقالات
+                        <span class="tag">&lt;/a&gt;</span>
+                    <span class="tag">&lt;/li&gt;</span>
+                    <span class="tag">&lt;li&gt;</span>
+                        <span class="tag">&lt;a</span> <span class="keyword">href</span>=<span class="string">"{{ route('admin.categories.index') }}"</span> 
+                           <span class="keyword">class</span>=<span class="string">"flex items-center p-3 hover:bg-gray-700 rounded {{ request()->routeIs('admin.categories.*') ? 'bg-gray-700' : '' }}"</span><span class="tag">&gt;</span>
+                            <span class="tag">&lt;i</span> <span class="keyword">class</span>=<span class="string">"fas fa-tags ml-3"</span><span class="tag">&gt;&lt;/i&gt;</span>
+                            دسته‌بندی‌ها
+                        <span class="tag">&lt;/a&gt;</span>
+                    <span class="tag">&lt;/li&gt;</span>
+                    <span class="tag">&lt;li&gt;</span>
+                        <span class="tag">&lt;a</span> <span class="keyword">href</span>=<span class="string">"{{ route('admin.seo.index') }}"</span> 
+                           <span class="keyword">class</span>=<span class="string">"flex items-center p-3 hover:bg-gray-700 rounded {{ request()->routeIs('admin.seo.*') ? 'bg-gray-700' : '' }}"</span><span class="tag">&gt;</span>
+                            <span class="tag">&lt;i</span> <span class="keyword">class</span>=<span class="string">"fas fa-search ml-3"</span><span class="tag">&gt;&lt;/i&gt;</span>
+                            مدیریت SEO
+                        <span class="tag">&lt;/a&gt;</span>
+                    <span class="tag">&lt;/li&gt;</span>
+                <span class="tag">&lt;/ul&gt;</span>
+            <span class="tag">&lt;/nav&gt;</span>
+        <span class="tag">&lt;/aside&gt;</span>
+
+        <span class="tag">&lt;main</span> <span class="keyword">class</span>=<span class="string">"flex-1 p-6 overflow-y-auto"</span><span class="tag">&gt;</span>
+            @if(session('success'))
+                <span class="tag">&lt;div</span> <span class="keyword">class</span>=<span class="string">"bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4"</span><span class="tag">&gt;</span>
+                    {{ session('success') }}
+                <span class="tag">&lt;/div&gt;</span>
+            @endif
+
+            @if(session('error'))
+                <span class="tag">&lt;div</span> <span class="keyword">class</span>=<span class="string">"bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4"</span><span class="tag">&gt;</span>
+                    {{ session('error') }}
+                <span class="tag">&lt;/div&gt;</span>
+            @endif
+
+            @yield('content')
+        <span class="tag">&lt;/main&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+
+    <span class="tag">&lt;script </span><span class="keyword">src</span>=<span class="string">"https://code.jquery.com/jquery-3.6.0.min.js"</span><span class="tag">&gt;&lt;/script&gt;</span>
+    @stack('scripts')
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></pre>
+                </div>
+                
+                <div class="tab-content" id="seoConfig">
+                    <div class="code-header">
+                        <h3><i class="fas fa-chart-line"></i> config/seotools.php</h3>
+                        <button class="copy-btn" onclick="copyCode('seoConfig-code')">کپی کد</button>
+                    </div>
+                    <pre id="seoConfig-code" class="code"><span class="tag">&lt;?php</span>
+
+<span class="keyword">return</span> [
+    <span class="string">'meta'</span> => [
+        <span class="string">'defaults'</span> => [
+            <span class="string">'title'</span> => <span class="string">'سایت خبری | آخرین اخبار ایران و جهان'</span>,
+            <span class="string">'titleBefore'</span> => <span class="keyword">false</span>,
+            <span class="string">'description'</span> => <span class="string">'آخرین اخبار ایران و جهان را در سایت خبری ما دنبال کنید'</span>,
+            <span class="string">'separator'</span> => <span class="string">' | '</span>,
+            <span class="string">'keywords'</span> => [<span class="string">'اخبار'</span>, <span class="string">'خبر'</span>, <span class="string">'اخبار ایران'</span>, <span class="string">'اخبار جهان'</span>],
+            <span class="string">'canonical'</span> => <span class="keyword">false</span>,
+            <span class="string">'robots'</span> => <span class="string">'index, follow'</span>,
+        ],
+        <span class="string">'webmaster_tags'</span> => [
+            <span class="string">'google'</span> => <span class="keyword">null</span>,
+            <span class="string">'bing'</span> => <span class="keyword">null</span>,
+            <span class="string">'alexa'</span> => <span class="keyword">null</span>,
+            <span class="string">'pinterest'</span> => <span class="keyword">null</span>,
+            <span class="string">'yandex'</span> => <span class="keyword">null</span>,
+        ],
+    ],
+
+    <span class="string">'opengraph'</span> => [
+        <span class="string">'defaults'</span> => [
+            <span class="string">'title'</span> => <span class="string">'سایت خبری | آخرین اخبار'</span>,
+            <span class="string">'description'</span> => <span class="string">'آخرین اخبار ایران و جهان'</span>,
+            <span class="string">'url'</span> => <span class="keyword">null</span>,
+            <span class="string">'type'</span> => <span class="string">'website'</span>,
+            <span class="string">'site_name'</span> => <span class="string">'سایت خبری'</span>,
+            <span class="string">'images'</span> => [],
+        ],
+    ],
+
+    <span class="string">'twitter'</span> => [
+        <span class="string">'defaults'</span> => [
+            <span class="string">'card'</span> => <span class="string">'summary_large_image'</span>,
+            <span class="string">'site'</span> => <span class="string">'@news_site'</span>,
+            <span class="string">'creator'</span> => <span class="string">'@news_site'</span>,
+        ],
+    ],
+
+    <span class="string">'json-ld'</span> => [
+        <span class="string">'defaults'</span> => [
+            <span class="string">'title'</span> => <span class="string">'سایت خبری'</span>,
+            <span class="string">'description'</span> => <span class="string">'آخرین اخبار ایران و جهان'</span>,
+            <span class="string">'url'</span> => <span class="keyword">null</span>,
+            <span class="string">'type'</span> => <span class="string">'WebPage'</span>,
+            <span class="string">'images'</span> => [],
+        ],
+    ],
+];</pre>
+                </div>
+                
+                <div class="tab-content" id="readme">
+                    <div class="code-header">
+                        <h3><i class="fas fa-book"></i> README.md</h3>
+                        <button class="copy-btn" onclick="copyCode('readme-code')">کپی کد</button>
+                    </div>
+                    <pre id="readme-code" class="code"><span class="comment"># 🗞️ سایت خبری حرفه‌ای با Laravel</span>
+
+<span class="comment">## ✨ ویژگی‌ها</span>
+<span class="comment">✅ پنل مدیریت حرفه‌ای</span>
+<span class="comment">✅ سیستم SEO کامل</span>
+<span class="comment">✅ پخش زنده</span>
+<span class="comment">✅ مدیریت مقالات پیشرفته</span>
+<span class="comment">✅ سیستم کاربران با نقش‌های مختلف</span>
+<span class="comment">✅ طراحی ریسپانسیو</span>
+
+<span class="comment">## 🚀 نصب و راه‌اندازی</span>
+
+<span class="comment">1. نصب پیش‌نیازها:</span>
+<span class="comment">```bash</span>
+composer install
+npm install
+<span class="comment">```</span>
+
+<span class="comment">2. تنظیم دیتابیس:</span>
+<span class="comment">```bash</span>
+cp .env.example .env
+php artisan key:generate
+<span class="comment">```</span>
+
+<span class="comment">3. اجرای Migration:</span>
+<span class="comment">```bash</span>
+php artisan migrate --seed
+<span class="comment">```</span>
+
+<span class="comment">4. ایجاد کاربر ادمین:</span>
+<span class="comment">```bash</span>
+php artisan tinker
+<span class="comment">```</span>
+
+<span class="comment">5. اجرای پروژه:</span>
+<span class="comment">```bash</span>
+<span class="comment"># ترمینال 1</span>
+php artisan serve
+
+<span class="comment"># ترمینال 2</span>
+npm run dev
+<span class="comment">```</span>
+
+<span class="comment">## 🔧 دسترسی‌ها</span>
+
+<span class="comment">- **آدرس:** http://127.0.0.1:8000</span>
+<span class="comment">- **پنل مدیریت:** /admin/dashboard</span>
+<span class="comment">- **ورود:** admin@example.com / password123</span>
+
+<span class="comment">## 📁 ساختار پروژه</span>
+
+<span class="comment">```
+news-site/</span>
+<span class="comment">├── app/</span>
+<span class="comment">│   ├── Http/Controllers/Admin/</span>
+<span class="comment">│   ├── Models/</span>
+<span class="comment">│   └── Traits/</span>
+<span class="comment">├── database/migrations/</span>
+<span class="comment">├── resources/views/admin/</span>
+<span class="comment">├── routes/</span>
+<span class="comment">└── config/</span>
+<span class="comment">```</span>
+
+<span class="comment">## 🛠️ تکنولوژی‌ها</span>
+
+<span class="comment">- **Backend:** Laravel 10, MySQL, Redis</span>
+<span class="comment">- **Frontend:** Vue.js 3, Tailwind CSS, Alpine.js</span>
+<span class="comment">- **SEO:** Open Graph, Twitter Cards, JSON-LD, Sitemap</span>
+<span class="comment">- **پخش زنده:** RTMP/HLS, WebSocket</span>
+
+<span class="comment">## 📄 لایسنس</span>
+
+<span class="comment">MIT License - رایگان برای استفاده شخصی و تجاری</span></pre>
+                </div>
+            </div>
+        </div>
+        
+        <div class="alert">
+            <i class="fas fa-lightbulb"></i> <strong>توجه:</strong> تمامی کدها به صورت کامل و آماده اجرا ارائه شده‌اند. فقط کافیست فایل‌ها را در پروژه Laravel کپی کنید.
+        </div>
+        
+        <div class="footer">
+            <p>سایت خبری حرفه‌ای با Laravel | توسعه داده شده با ❤️ برای جامعه فارسی‌زبان</p>
+            <p style="margin-top: 10px; font-size: 0.9rem; color: #666;">
+                تمامی کدها تست شده و آماده اجرا هستند | پشتیبانی: GitHub Issues
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // مدیریت تب‌ها
+        function showTab(tabId) {
+            // مخفی کردن همه تب‌ها
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // غیرفعال کردن همه دکمه‌های تب
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // نمایش تب انتخاب شده
+            document.getElementById(tabId).classList.add('active');
+            
+            // فعال کردن دکمه تب
+            const tabs = document.querySelectorAll('.tab');
+            for (let i = 0; i < tabs.length; i++) {
+                if (tabs[i].getAttribute('onclick') === `showTab('${tabId}')`) {
+                    tabs[i].classList.add('active');
+                    break;
+                }
+            }
+        }
+        
+        // کپی کد
+        function copyCode(elementId) {
+            const codeElement = document.getElementById(elementId);
+            const codeText = codeElement.textContent;
+            
+            navigator.clipboard.writeText(codeText).then(() => {
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = 'کپی شد!';
+                button.style.background = '#10B981';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '';
+                }, 2000);
+            }).catch(err => {
+                console.error('خطا در کپی کردن: ', err);
+            });
+        }
+        
+        // هایلایت سینتکس ساده
+        document.addEventListener('DOMContentLoaded', function() {
+            const codeElements = document.querySelectorAll('.code');
+            codeElements.forEach(code => {
+                let html = code.innerHTML;
+                
+                // هایلایت کلمات کلیدی PHP
+                html = html.replace(/\b(public|private|protected|function|class|extends|use|namespace|return|if|else|foreach|for|while|switch|case|break|continue|default|new|array|string|int|bool|true|false|null|void)\b/g, 
+                    '<span class="keyword">$1</span>');
+                
+                // هایلایت رشته‌ها
+                html = html.replace(/(["'].*?["'])/g, '<span class="string">$1</span>');
+                
+                // هایلایت کامنت‌ها
+                html = html.replace(/(\/\/.*|\/\*[\s\S]*?\*\/)/g, '<span class="comment">$1</span>');
+                
+                // هایلایت توابع
+                html = html.replace(/\b([a-zA-Z_][a-zA-Z0-9_]*)\s*\(/g, '<span class="function">$1</span>(');
+                
+                // هایلایت متغیرها
+                html = html.replace(/\$([a-zA-Z_][a-zA-Z0-9_]*)/g, '<span class="variable">$$1</span>');
+                
+                // هایلایت تگ‌های HTML
+                html = html.replace(/&lt;(\/?[a-zA-Z][a-zA-Z0-9]*)/g, '<span class="tag">&lt;$1</span>');
+                
+                code.innerHTML = html;
+            });
+        });
+        
+        // نمایش تب اول به صورت پیش‌فرض
+        showTab('composer');
+    </script>
+</body>
+</html>
